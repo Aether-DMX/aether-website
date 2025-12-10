@@ -1,0 +1,179 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 750" fill="none">
+  <defs>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="700" height="750" fill="#0a0a0c"/>
+
+  <!-- ========== OPTIONAL ETHERNET (Top) ========== -->
+  <line x1="350" y1="25" x2="350" y2="50" stroke="#3a3a42" stroke-width="2" stroke-dasharray="4,3"/>
+  <text x="400" y="40" fill="#3a3a42" font-family="system-ui, sans-serif" font-size="11">Ethernet (Optional)</text>
+
+  <!-- ========== CONTROLLER ========== -->
+  <rect x="300" y="50" width="100" height="80" rx="12" fill="#1a1a1f" stroke="#2a2a32" stroke-width="1"/>
+  <!-- Monitor icon -->
+  <rect x="330" y="65" width="40" height="28" rx="3" fill="none" stroke="#00d4ff" stroke-width="2"/>
+  <line x1="350" y1="93" x2="350" y2="100" stroke="#00d4ff" stroke-width="2"/>
+  <line x1="338" y1="100" x2="362" y2="100" stroke="#00d4ff" stroke-width="2"/>
+  <text x="350" y="122" text-anchor="middle" fill="#ffffff" font-family="system-ui, sans-serif" font-size="12">Controller</text>
+
+  <!-- ========== WIFI BROADCAST INDICATOR ========== -->
+  <path d="M410 70 Q430 60 450 70" stroke="#00d4ff" stroke-width="1.5" fill="none" opacity="0.3"/>
+  <path d="M415 82 Q430 74 445 82" stroke="#00d4ff" stroke-width="1.5" fill="none" opacity="0.5"/>
+  <path d="M420 94 Q430 88 440 94" stroke="#00d4ff" stroke-width="1.5" fill="none" opacity="0.8"/>
+  <text x="480" y="82" fill="#00d4ff" font-family="system-ui, sans-serif" font-size="10">Pi broadcasts WiFi</text>
+
+  <!-- ========== HARDWIRED CONNECTION LINE ========== -->
+  <line x1="300" y1="90" x2="180" y2="90" stroke="#00d4ff" stroke-width="2"/>
+  <text x="115" y="65" text-anchor="middle" fill="#00d4ff" font-family="system-ui, sans-serif" font-size="11">Hardwired</text>
+  <text x="115" y="78" text-anchor="middle" fill="#3a3a42" font-family="system-ui, sans-serif" font-size="10">(Optional)</text>
+
+  <!-- ========== HARDWIRED NODE ========== -->
+  <rect x="65" y="88" width="100" height="75" rx="12" fill="#1a1a1f" stroke="#2a2a32" stroke-width="1"/>
+  <!-- Ethernet icon -->
+  <rect x="95" y="100" width="30" height="18" rx="2" fill="none" stroke="#00d4ff" stroke-width="1.5"/>
+  <circle cx="103" cy="109" r="2" fill="#00d4ff"/>
+  <circle cx="112" cy="109" r="2" fill="#00d4ff"/>
+  <circle cx="121" cy="109" r="2" fill="#00d4ff"/>
+  <text x="115" y="135" text-anchor="middle" fill="#ffffff" font-family="system-ui, sans-serif" font-size="11">Universe 1</text>
+  <text x="115" y="150" text-anchor="middle" fill="#00d4ff" font-family="system-ui, sans-serif" font-size="9">Ch 1-256</text>
+  
+  <!-- SPLIT badge -->
+  <rect x="130" y="83" width="35" height="14" rx="3" fill="#00d4ff"/>
+  <text x="147" y="93" text-anchor="middle" fill="#0a0a0c" font-family="system-ui, sans-serif" font-size="8" font-weight="700">SPLIT</text>
+
+  <!-- Line to hardwired fixtures -->
+  <line x1="115" y1="163" x2="115" y2="200" stroke="#00d4ff" stroke-width="2"/>
+  
+  <!-- Hardwired Fixtures -->
+  <circle cx="90" cy="225" r="12" fill="#00d4ff" filter="url(#glow)"/>
+  <circle cx="115" cy="225" r="12" fill="#00b0dd"/>
+  <circle cx="140" cy="225" r="12" fill="#0090bb"/>
+  <text x="115" y="255" text-anchor="middle" fill="#5a5a65" font-family="system-ui, sans-serif" font-size="10">Fixtures</text>
+
+  <!-- ========== MAIN VERTICAL LINE FROM CONTROLLER ========== -->
+  <line x1="350" y1="130" x2="350" y2="280" stroke="#00d4ff" stroke-width="2"/>
+
+  <!-- ========== HORIZONTAL DISTRIBUTION LINE ========== -->
+  <line x1="115" y1="320" x2="585" y2="320" stroke="#00d4ff" stroke-width="2"/>
+  
+  <!-- Vertical connectors to nodes -->
+  <line x1="115" y1="280" x2="115" y2="320" stroke="#00d4ff" stroke-width="2"/>
+  <line x1="232" y1="320" x2="232" y2="360" stroke="#00d4ff" stroke-width="2"/>
+  <line x1="350" y1="280" x2="350" y2="360" stroke="#00d4ff" stroke-width="2"/>
+  <line x1="468" y1="320" x2="468" y2="360" stroke="#00d4ff" stroke-width="2"/>
+  <line x1="585" y1="320" x2="585" y2="360" stroke="#22c55e" stroke-width="2"/>
+
+  <!-- ========== WIRELESS NODES ========== -->
+  
+  <!-- Node 1 - Universe 1 (Ch 257-512) - CYAN -->
+  <rect x="65" y="360" width="100" height="75" rx="12" fill="#1a1a1f" stroke="#2a2a32" stroke-width="1"/>
+  <!-- WiFi icon -->
+  <path d="M100 375 Q115 365 130 375" stroke="#00d4ff" stroke-width="1.5" fill="none"/>
+  <path d="M105 384 Q115 376 125 384" stroke="#00d4ff" stroke-width="1.5" fill="none"/>
+  <path d="M110 393 Q115 387 120 393" stroke="#00d4ff" stroke-width="1.5" fill="none"/>
+  <circle cx="115" cy="400" r="2" fill="#00d4ff"/>
+  <text x="115" y="418" text-anchor="middle" fill="#ffffff" font-family="system-ui, sans-serif" font-size="11">Universe 1</text>
+  <text x="115" y="432" text-anchor="middle" fill="#00d4ff" font-family="system-ui, sans-serif" font-size="9">Ch 257-512</text>
+  
+  <!-- SPLIT badge -->
+  <rect x="130" y="355" width="35" height="14" rx="3" fill="#00d4ff"/>
+  <text x="147" y="365" text-anchor="middle" fill="#0a0a0c" font-family="system-ui, sans-serif" font-size="8" font-weight="700">SPLIT</text>
+
+  <!-- Node 2 - Universe 2 (Ch 1-170) - PURPLE -->
+  <rect x="182" y="360" width="100" height="75" rx="12" fill="#1a1a1f" stroke="#2a2a32" stroke-width="1"/>
+  <!-- WiFi icon -->
+  <path d="M217 375 Q232 365 247 375" stroke="#a855f7" stroke-width="1.5" fill="none"/>
+  <path d="M222 384 Q232 376 242 384" stroke="#a855f7" stroke-width="1.5" fill="none"/>
+  <path d="M227 393 Q232 387 237 393" stroke="#a855f7" stroke-width="1.5" fill="none"/>
+  <circle cx="232" cy="400" r="2" fill="#a855f7"/>
+  <text x="232" y="418" text-anchor="middle" fill="#ffffff" font-family="system-ui, sans-serif" font-size="11">Universe 2</text>
+  <text x="232" y="432" text-anchor="middle" fill="#71717a" font-family="system-ui, sans-serif" font-size="9">Ch 1-170</text>
+  
+  <!-- SPLIT badge -->
+  <rect x="247" y="355" width="35" height="14" rx="3" fill="#a855f7"/>
+  <text x="264" y="365" text-anchor="middle" fill="#ffffff" font-family="system-ui, sans-serif" font-size="8" font-weight="700">SPLIT</text>
+
+  <!-- Node 3 - Universe 2 (Ch 171-341) - PURPLE -->
+  <rect x="300" y="360" width="100" height="75" rx="12" fill="#1a1a1f" stroke="#2a2a32" stroke-width="1"/>
+  <!-- WiFi icon -->
+  <path d="M335 375 Q350 365 365 375" stroke="#a855f7" stroke-width="1.5" fill="none"/>
+  <path d="M340 384 Q350 376 360 384" stroke="#a855f7" stroke-width="1.5" fill="none"/>
+  <path d="M345 393 Q350 387 355 393" stroke="#a855f7" stroke-width="1.5" fill="none"/>
+  <circle cx="350" cy="400" r="2" fill="#a855f7"/>
+  <text x="350" y="418" text-anchor="middle" fill="#ffffff" font-family="system-ui, sans-serif" font-size="11">Universe 2</text>
+  <text x="350" y="432" text-anchor="middle" fill="#71717a" font-family="system-ui, sans-serif" font-size="9">Ch 171-341</text>
+  
+  <!-- SPLIT badge -->
+  <rect x="365" y="355" width="35" height="14" rx="3" fill="#a855f7"/>
+  <text x="382" y="365" text-anchor="middle" fill="#ffffff" font-family="system-ui, sans-serif" font-size="8" font-weight="700">SPLIT</text>
+
+  <!-- Node 4 - Universe 2 (Ch 342-512) - PURPLE -->
+  <rect x="418" y="360" width="100" height="75" rx="12" fill="#1a1a1f" stroke="#2a2a32" stroke-width="1"/>
+  <!-- WiFi icon -->
+  <path d="M453 375 Q468 365 483 375" stroke="#a855f7" stroke-width="1.5" fill="none"/>
+  <path d="M458 384 Q468 376 478 384" stroke="#a855f7" stroke-width="1.5" fill="none"/>
+  <path d="M463 393 Q468 387 473 393" stroke="#a855f7" stroke-width="1.5" fill="none"/>
+  <circle cx="468" cy="400" r="2" fill="#a855f7"/>
+  <text x="468" y="418" text-anchor="middle" fill="#ffffff" font-family="system-ui, sans-serif" font-size="11">Universe 2</text>
+  <text x="468" y="432" text-anchor="middle" fill="#71717a" font-family="system-ui, sans-serif" font-size="9">Ch 342-512</text>
+  
+  <!-- SPLIT badge -->
+  <rect x="483" y="355" width="35" height="14" rx="3" fill="#a855f7"/>
+  <text x="500" y="365" text-anchor="middle" fill="#ffffff" font-family="system-ui, sans-serif" font-size="8" font-weight="700">SPLIT</text>
+
+  <!-- Node 5 - Universe 3 (Ch 1-512) - GREEN -->
+  <rect x="535" y="360" width="100" height="75" rx="12" fill="#1a1a1f" stroke="#2a2a32" stroke-width="1"/>
+  <!-- WiFi icon -->
+  <path d="M570 375 Q585 365 600 375" stroke="#22c55e" stroke-width="1.5" fill="none"/>
+  <path d="M575 384 Q585 376 595 384" stroke="#22c55e" stroke-width="1.5" fill="none"/>
+  <path d="M580 393 Q585 387 590 393" stroke="#22c55e" stroke-width="1.5" fill="none"/>
+  <circle cx="585" cy="400" r="2" fill="#22c55e"/>
+  <text x="585" y="418" text-anchor="middle" fill="#ffffff" font-family="system-ui, sans-serif" font-size="11">Universe 3</text>
+  <text x="585" y="432" text-anchor="middle" fill="#71717a" font-family="system-ui, sans-serif" font-size="9">Ch 1-512</text>
+  
+  <!-- FULL badge -->
+  <rect x="600" y="355" width="32" height="14" rx="3" fill="#22c55e"/>
+  <text x="616" y="365" text-anchor="middle" fill="#0a0a0c" font-family="system-ui, sans-serif" font-size="8" font-weight="700">FULL</text>
+
+  <!-- ========== AETHER-PULSE LABEL ========== -->
+  <text x="660" y="395" fill="#a855f7" font-family="system-ui, sans-serif" font-size="10" font-weight="600">Aether-Pulse</text>
+  <text x="660" y="408" fill="#5a5a65" font-family="system-ui, sans-serif" font-size="9">(Nodes)</text>
+  <text x="660" y="425" fill="#5a5a65" font-family="system-ui, sans-serif" font-size="8">Auto Pair</text>
+
+  <!-- ========== LINES TO FIXTURES ========== -->
+  <line x1="115" y1="435" x2="115" y2="480" stroke="#00d4ff" stroke-width="2"/>
+  <line x1="232" y1="435" x2="232" y2="480" stroke="#a855f7" stroke-width="2"/>
+  <line x1="350" y1="435" x2="350" y2="480" stroke="#a855f7" stroke-width="2"/>
+  <line x1="468" y1="435" x2="468" y2="480" stroke="#a855f7" stroke-width="2"/>
+  <line x1="585" y1="435" x2="585" y2="480" stroke="#22c55e" stroke-width="2"/>
+
+  <!-- ========== BOTTOM FIXTURES ========== -->
+  <circle cx="70" cy="520" r="15" fill="#0077cc" filter="url(#glow)"/>
+  <circle cx="115" cy="520" r="15" fill="#0099dd"/>
+  <circle cx="160" cy="520" r="15" fill="#00bbee"/>
+  <circle cx="205" cy="520" r="15" fill="#00ddff" filter="url(#glow)"/>
+  <circle cx="250" cy="520" r="15" fill="#00eeff"/>
+  <circle cx="295" cy="520" r="15" fill="#44ddff"/>
+  <circle cx="340" cy="520" r="15" fill="#8855ff" filter="url(#glow)"/>
+  <circle cx="385" cy="520" r="15" fill="#aa44ff"/>
+  <circle cx="430" cy="520" r="15" fill="#cc44ee"/>
+  <circle cx="475" cy="520" r="15" fill="#ee44cc" filter="url(#glow)"/>
+  <circle cx="520" cy="520" r="15" fill="#ff4499"/>
+  <circle cx="565" cy="520" r="15" fill="#ff6688"/>
+  <circle cx="610" cy="520" r="15" fill="#ff8877" filter="url(#glow)"/>
+  
+  <text x="350" y="560" text-anchor="middle" fill="#5a5a65" font-family="system-ui, sans-serif" font-size="12">Fixtures</text>
+
+  <!-- ========== BOTTOM CALLOUT ========== -->
+  <text x="350" y="610" text-anchor="middle" fill="#00d4ff" font-family="system-ui, sans-serif" font-size="13" font-weight="600">Unlimited Scalability</text>
+  <text x="350" y="635" text-anchor="middle" fill="#5a5a65" font-family="system-ui, sans-serif" font-size="11">Split channels across nodes • Wired + wireless hybrid • 512 channels per universe</text>
+
+</svg>
