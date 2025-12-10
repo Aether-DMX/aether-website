@@ -176,7 +176,7 @@ export default function DocsPage() {
                 Share your setups, ask questions, and connect with other lighting professionals.
               </p>
               <a
-                href="https://discord.gg/aetherdmx"
+                href="https://discord.gg/PY6EvARb"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 btn-secondary"
