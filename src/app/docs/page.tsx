@@ -32,6 +32,7 @@ export default async function Page() {
     </main>
   )
 }
+
 import type { Metadata } from 'next';
 import Link from 'next/link';
 
