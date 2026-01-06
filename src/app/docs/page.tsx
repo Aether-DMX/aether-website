@@ -237,7 +237,7 @@ export default async function DocsPage() {
                 Share your setups, ask questions, and connect with other lighting professionals.
               </p>
               <a
-                href="https://discord.gg/w7WffZUb"
+                href="https://discord.gg/uAHsRVtJMY"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 btn-secondary"

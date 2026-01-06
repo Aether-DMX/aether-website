@@ -20,7 +20,7 @@ export default function Footer() {
 
   const socialLinks = [
     {
-      href: 'https://discord.gg/w7WffZUb',
+      href: 'https://discord.gg/uAHsRVtJMY',
       label: 'Discord',
       icon: (
         <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
