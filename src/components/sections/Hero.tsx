@@ -24,10 +24,10 @@ export default function Hero() {
         {/* Badge */}
         <div className="inline-flex items-center space-x-2 bg-[#111114] border border-[#1f1f24] rounded-full px-4 py-2 mb-8">
           <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#00d4ff] opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-[#00d4ff]"></span>
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#facc15] opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-[#facc15]"></span>
           </span>
-          <span className="text-sm text-[#71717a]">Private Beta Now Open</span>
+          <span className="text-sm text-[#71717a]">Beta in Development</span>
         </div>
 
         {/* Main Headline */}
