@@ -73,8 +73,8 @@ export default function Pricing() {
             Early Access <span className="gradient-text">Pricing</span>
           </h2>
           <p className="text-lg text-[#71717a] max-w-2xl mx-auto">
-            Simple, transparent pricing that scales with your needs. Beta users 
-            lock in founding member rates.
+            The private beta is completely free during testing. These prices represent founding member rates available to beta participants after launch. 
+            Simple, transparent pricing that scales with your needs.
           </p>
         </div>
 

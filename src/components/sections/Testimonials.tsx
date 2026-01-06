@@ -36,7 +36,7 @@ export default function Testimonials() {
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4">
-            Trusted by <span className="gradient-text">Professionals</span>
+            Designed for <span className="gradient-text">Professionals</span>
           </h2>
           <p className="text-lg text-[#71717a] max-w-2xl mx-auto">
             Early beta users are already seeing the difference intelligent lighting control can make.

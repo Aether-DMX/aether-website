@@ -72,7 +72,7 @@ export default function DeploymentModes() {
           </h2>
           <p className="text-lg text-[#71717a] max-w-2xl mx-auto">
             Three deployment modes to match your security requirements, connectivity 
-            constraints, and operational preferences.
+            constraints, and operational preferences. <span className="text-[#f59e0b]">The beta focuses on Local and Hybrid modes; Cloud features are on our roadmap.</span>
           </p>
         </div>
 

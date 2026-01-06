@@ -240,8 +240,8 @@ export default function BetaSignup() {
             </h2>
             <p className="text-lg text-[#71717a] mb-8">
               We&apos;re inviting a select group of lighting professionals to help shape 
-              Aether DMX before public release. Early adopters get founding member 
-              pricing and direct input on features.
+              Aether DMX before public release. The beta is completely free during the testing phase. Early adopters will receive founding member 
+              pricing after launch.
             </p>
 
             <div className="space-y-6">
@@ -267,10 +267,10 @@ export default function BetaSignup() {
                   </svg>
                 </div>
                 <div>
-                  <h3 className="text-white font-semibold mb-1">What to expect</h3>
+                  <h3 className="text-white font-semibold mb-1">What you'll receive</h3>
                   <p className="text-sm text-[#71717a]">
-                    Pre-release software, recommended hardware lists, direct access to 
-                    developers, and the opportunity to influence the product roadmap.
+                    A welcome email with setup instructions, Discord access to connect with other beta users and the Aether team, 
+                    and early guidance on hardware assembly and software usage.
                   </p>
                 </div>
               </div>
