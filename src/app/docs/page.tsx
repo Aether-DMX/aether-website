@@ -1,3 +1,32 @@
+import Link from 'next/link'
+import { getAllDocs } from '@/lib/markdown'
+import styles from './docs.module.css'
+
+export const metadata = {
+  title: 'Docs — AETHER DMX',
+}
+
+export default async function Page() {
+  const docs = await getAllDocs()
+  docs.sort((a, b) => (a.meta.order || 0) - (b.meta.order || 0))
+  return (
+    <main className={styles.docContainer}>
+      <h1>Documentation</h1>
+      <p>Guides and reference for AETHER DMX — v0.9 Beta</p>
+      <section className={styles.docList}>
+        {docs.map((d) => (
+          <article key={d.slug} className={styles.docItem}>
+            <h3 className={styles.docTitle}>
+              <Link href={`/docs/${d.slug}`}>{d.meta.title}</Link>
+              <span className={styles.badge}>{d.meta.version || 'v0.9 Beta'}</span>
+            </h3>
+            <div className={styles.docMeta}>{d.meta.description}</div>
+          </article>
+        ))}
+      </section>
+    </main>
+  )
+}
 import type { Metadata } from 'next';
 import Link from 'next/link';
 

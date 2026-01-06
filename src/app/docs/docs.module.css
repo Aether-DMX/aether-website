@@ -1,0 +1,42 @@
+.docList {
+  display: grid;
+  gap: 1rem;
+}
+
+.docItem {
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  background: var(--card-bg, #ffffff);
+  border: 1px solid rgba(0,0,0,0.06);
+}
+
+.docTitle {
+  margin: 0 0 0.25rem 0;
+  font-weight: 600;
+}
+
+.docMeta {
+  font-size: 0.9rem;
+  color: rgba(0,0,0,0.65);
+}
+
+.docContainer {
+  max-width: 860px;
+}
+
+.docContent pre {
+  overflow-x: auto;
+  padding: 0.75rem;
+  background: #0b1220;
+  color: #e6eef8;
+  border-radius: 6px;
+}
+
+.badge {
+  display: inline-block;
+  background: #f3f4f6;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  margin-left: 0.5rem;
+}
