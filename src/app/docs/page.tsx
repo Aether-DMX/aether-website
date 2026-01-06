@@ -15,13 +15,18 @@ export default async function Page() {
       <p>Guides and reference for AETHER DMX — v0.9 Beta</p>
       <section className={styles.docList}>
         {docs.map((d) => (
-          <article key={d.slug} className={styles.docItem}>
+          <Link
+            key={d.slug}
+            href={`/docs/${d.slug}`}
+            className={styles.docItem}
+            aria-label={`Read ${d.meta.title}`}
+          >
             <h3 className={styles.docTitle}>
-              <Link href={`/docs/${d.slug}`}>{d.meta.title}</Link>
+              {d.meta.title}
               <span className={styles.badge}>{d.meta.version || 'v0.9 Beta'}</span>
             </h3>
             <div className={styles.docMeta}>{d.meta.description}</div>
-          </article>
+          </Link>
         ))}
       </section>
     </main>
