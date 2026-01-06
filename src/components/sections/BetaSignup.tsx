@@ -218,7 +218,7 @@ export default function BetaSignup() {
             </p>
             <p className="text-sm text-[#71717a]">
               In the meantime, join our{' '}
-              <a href="https://discord.gg/aetherdmx" className="text-[#00d4ff] hover:underline">
+              <a href="https://discord.gg/w7WffZUb" className="text-[#00d4ff] hover:underline">
                 Discord community
               </a>{' '}
               to connect with other early adopters.
