@@ -28,7 +28,7 @@ export async function POST(request: NextRequest) {
     if (!invokeResult.ok) {
       console.error('Edge function error:', invokeResult.error);
       return NextResponse.json(
-        { ok: false, error: 'Failed to resend invite email' },
+        { ok: false, error: invokeResult.error || 'Failed to resend invite email' },
         { status: 502 }
       );
     }
