@@ -24,7 +24,7 @@ export default function Navbar() {
           <Link href="/" className="flex items-center space-x-2">
             <div className="relative">
               {/* Header logo image - place `aether-logo.png` in the `public/` folder */}
-              <img src="/aether-logo.png" alt="Aether logo" className="w-8 h-8 rounded-lg object-cover logo-dmx" />
+              <img src="/aether-logo.png" alt="Aether logo" className="w-9 h-9 rounded-lg object-cover logo-dmx" />
             </div>
             <span className="text-xl font-bold tracking-tight">
               Aether <span className="text-[#00d4ff]">DMX</span>
