@@ -156,4 +156,10 @@ html {
   /* keep existing layout sizing untouched; apply color cycling */
   animation: dmx-hue-rotate 6s linear infinite;
   will-change: filter;
+  /* Try to hide any white background by using a blend mode over the dark site BG.
+     This is a non-destructive CSS-only approach — for perfect results use a
+     transparent PNG (recommended). */
+  mix-blend-mode: multiply;
+  background-color: transparent;
+  display: inline-block;
 }
