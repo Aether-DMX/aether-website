@@ -20,33 +20,218 @@
   box-shadow: 0 6px 18px rgba(2,6,23,0.08);
 }
 
-.docTitle {
-  margin: 0 0 0.25rem 0;
-  font-weight: 600;
+.docPageWrapper {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0a0a0c 0%, #111114 100%);
+  padding: 3rem 1rem;
+  margin-top: -80px;
+  padding-top: 100px;
 }
 
-.docMeta {
-  font-size: 0.9rem;
-  color: rgba(0,0,0,0.65);
+.docPageContainer {
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #00d4ff;
+  text-decoration: none;
+  font-size: 0.95rem;
+  margin-bottom: 2rem;
+  padding: 0.5rem 0;
+  transition: all 200ms ease;
+}
+
+.backLink:hover {
+  color: #00a8cc;
+  gap: 0.75rem;
+}
+
+.docHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid #1f1f24;
+}
+
+.docTitle {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 0.75rem 0;
+  line-height: 1.2;
+}
+
+.docDescription {
+  font-size: 1.1rem;
+  color: #a1a1a6;
+  margin: 0;
+  max-width: 600px;
 }
 
 .docContainer {
-  max-width: 860px;
+  max-width: 800px;
+}
+
+.docContent {
+  color: #ffffff;
+  line-height: 1.8;
+  padding: 2rem 0;
+  font-size: 1rem;
+}
+
+.docContent h2 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin: 2rem 0 1rem;
+  color: #ffffff;
+  border-bottom: 2px solid #00d4ff;
+  padding-bottom: 0.5rem;
+}
+
+.docContent h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin: 1.5rem 0 0.75rem;
+  color: #00d4ff;
+}
+
+.docContent h4,
+.docContent h5,
+.docContent h6 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 1.25rem 0 0.5rem;
+  color: #e6eef8;
+}
+
+.docContent p {
+  margin: 1rem 0;
+  color: #c8cad3;
+}
+
+.docContent a {
+  color: #00d4ff;
+  text-decoration: none;
+  transition: color 200ms ease;
+}
+
+.docContent a:hover {
+  color: #00a8cc;
+  text-decoration: underline;
+}
+
+.docContent ul,
+.docContent ol {
+  margin: 1.25rem 0;
+  padding-left: 1.5rem;
+}
+
+.docContent li {
+  margin: 0.5rem 0;
+  color: #c8cad3;
+}
+
+.docContent code:not(pre code) {
+  background: #1a1a1f;
+  color: #00d4ff;
+  padding: 0.15rem 0.4rem;
+  border-radius: 3px;
+  font-size: 0.9em;
+  font-family: 'Courier New', Courier, monospace;
 }
 
 .docContent pre {
-  overflow-x: auto;
-  padding: 0.75rem;
   background: #0b1220;
   color: #e6eef8;
+  border: 1px solid #1f1f24;
   border-radius: 6px;
+  padding: 1.25rem;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.docContent pre code {
+  background: none;
+  color: inherit;
+  padding: 0;
+}
+
+.docContent blockquote {
+  border-left: 4px solid #00d4ff;
+  background: #111114;
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+  border-radius: 4px;
+  color: #a1a1a6;
+}
+
+.docContent table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  border: 1px solid #1f1f24;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.docContent table th {
+  background: #111114;
+  color: #00d4ff;
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-weight: 600;
+  border-bottom: 2px solid #00d4ff;
+}
+
+.docContent table td {
+  border-bottom: 1px solid #1f1f24;
+  padding: 0.75rem 1rem;
+  color: #c8cad3;
+}
+
+.docContent table tr:last-child td {
+  border-bottom: none;
+}
+
+.docContent table tbody tr:hover {
+  background: rgba(0, 212, 255, 0.05);
 }
 
 .badge {
   display: inline-block;
-  background: #f3f4f6;
-  padding: 0.15rem 0.5rem;
+  background: #00d4ff;
+  color: #0a0a0c;
+  padding: 0.3rem 0.75rem;
   border-radius: 999px;
   font-size: 0.75rem;
-  margin-left: 0.5rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.btn {
+  display: inline-block;
+  background: #00d4ff;
+  color: #0a0a0c;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 200ms ease;
+}
+
+.btn:hover {
+  background: #00a8cc;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 212, 255, 0.3);
 }

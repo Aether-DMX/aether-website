@@ -9,24 +9,41 @@ export default async function Page({ params }: Params) {
   const doc = await getDocBySlug(slug)
   if (!doc) {
     return (
-      <main className={styles.docContainer}>
-        <h1>Not found</h1>
-        <p>Document "{slug}" not found.</p>
-        <p>
-          <Link href="/docs">Back to docs</Link>
-        </p>
-      </main>
+      <div className={styles.docPageWrapper}>
+        <div className={styles.docPageContainer}>
+          <Link href="/docs" className={styles.backLink}>← Back to Documentation</Link>
+          <div className="mt-12 text-center">
+            <h1 className="text-3xl font-bold mb-4 text-white">Document Not Found</h1>
+            <p className="text-[#71717a] mb-6">The document "{slug}" doesn't exist.</p>
+            <Link href="/docs" className={styles.btn}>
+              View All Docs
+            </Link>
+          </div>
+        </div>
+      </div>
     )
   }
 
   return (
-    <main className={styles.docContainer}>
-      <p>
-        <Link href="/docs">← Documentation</Link>
-      </p>
-      <h1>{doc.meta.title} <span className={styles.badge}>{doc.meta.version}</span></h1>
-      <p className={styles.docMeta}>{doc.meta.description}</p>
-      <article className={styles.docContent} dangerouslySetInnerHTML={{ __html: doc.contentHtml }} />
+    <main className={styles.docPageWrapper}>
+      <div className={styles.docPageContainer}>
+        <Link href="/docs" className={styles.backLink}>← Back to Documentation</Link>
+        <header className={styles.docHeader}>
+          <div>
+            <h1 className={styles.docTitle}>{doc.meta.title}</h1>
+            {doc.meta.description && (
+              <p className={styles.docDescription}>{doc.meta.description}</p>
+            )}
+          </div>
+          {doc.meta.version && (
+            <span className={styles.badge}>{doc.meta.version}</span>
+          )}
+        </header>
+        <article className={styles.docContent} dangerouslySetInnerHTML={{ __html: doc.contentHtml }} />
+        <footer className="mt-12 pt-6 border-t border-[#1f1f24]">
+          <Link href="/docs" className={styles.backLink}>← Back to Documentation</Link>
+        </footer>
+      </div>
     </main>
   )
 }
