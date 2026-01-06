@@ -33,15 +33,6 @@ export default async function Page() {
   )
 }
 
-import type { Metadata } from 'next';
-import Link from 'next/link';
-
-export const metadata: Metadata = {
-  title: 'Documentation | Aether DMX',
-  description: 'Documentation and knowledge base for Aether DMX. Getting started guides, hardware setup, patching, AI features, and troubleshooting.',
-  keywords: ['DMX documentation', 'lighting control docs', 'Aether DMX guide', 'DMX setup guide'],
-};
-
 const plannedSections = [
   {
     title: 'Getting Started',
@@ -106,7 +97,7 @@ const plannedSections = [
   },
 ];
 
-export default function DocsPage() {
+export function DocsPageLegacy() {
   return (
     <div className="min-h-screen pt-16">
       {/* Hero Section */}
