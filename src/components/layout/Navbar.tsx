@@ -23,22 +23,8 @@ export default function Navbar() {
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
             <div className="relative">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#00d4ff] to-[#a855f7] flex items-center justify-center">
-                <svg
-                  className="w-5 h-5 text-black"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M13 10V3L4 14h7v7l9-11h-7z"
-                  />
-                </svg>
-              </div>
+              {/* Header logo image - place `aether-logo.png` in the `public/` folder */}
+              <img src="/aether-logo.png" alt="Aether logo" className="w-8 h-8 rounded-lg object-cover" />
             </div>
             <span className="text-xl font-bold tracking-tight">
               Aether <span className="text-[#00d4ff]">DMX</span>

@@ -63,7 +63,7 @@ export default function HardwarePreview() {
             </Link>
           </div>
           <div className="relative">
-            <Image src="/ecosystem-diagram.png" alt="Aether DMX Ecosystem - Controller broadcasting WiFi to Aether-Pulse nodes with universe splitting" width={600} height={800} className="rounded-2xl" priority />
+            <Image src="/ecosystem-diagram.png.svg" alt="Aether DMX Ecosystem - Controller broadcasting WiFi to Aether-Pulse nodes with universe splitting" width={600} height={800} className="rounded-2xl" priority />
             <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-3/4 h-16 bg-gradient-to-r from-[#00d4ff]/10 via-[#a855f7]/10 to-[#00d4ff]/10 blur-2xl" />
           </div>
         </div>
