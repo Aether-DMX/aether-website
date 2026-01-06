@@ -144,3 +144,16 @@ html {
 .animate-pulse-glow {
   animation: pulse-glow 2s ease-in-out infinite;
 }
+
+/* DMX-style logo hue rotation */
+@keyframes dmx-hue-rotate {
+  0% { filter: hue-rotate(0deg) saturate(1); }
+  50% { filter: hue-rotate(180deg) saturate(1.1); }
+  100% { filter: hue-rotate(360deg) saturate(1); }
+}
+
+.logo-dmx {
+  /* keep existing layout sizing untouched; apply color cycling */
+  animation: dmx-hue-rotate 6s linear infinite;
+  will-change: filter;
+}
