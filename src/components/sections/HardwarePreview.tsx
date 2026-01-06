@@ -35,7 +35,7 @@ export default function HardwarePreview() {
             </h2>
             <p className="text-lg text-[#71717a] mb-8">
               Aether DMX is software-first and runs on off-the-shelf hardware. No proprietary 
-              lock-in, no $15k controllers. Build with components you can source anywhere.
+              lock-in, no expensive proprietary controllers. Build with components you can source anywhere.
             </p>
             <div className="bg-[#111114] border border-[#1f1f24] rounded-xl overflow-hidden mb-8">
               <table className="w-full">

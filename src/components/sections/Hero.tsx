@@ -38,8 +38,7 @@ export default function Hero() {
 
         {/* Subheadline */}
         <p className="text-lg sm:text-xl md:text-2xl text-[#71717a] max-w-3xl mx-auto mb-10 leading-relaxed">
-          An AI-powered lighting OS that replaces $15k controllers with smarter, 
-          modular, offline-capable brains running on hardware you already own.
+          An AI-powered lighting OS designed to reduce reliance on expensive proprietary controllers.
         </p>
 
         {/* CTAs */}

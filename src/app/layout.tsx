@@ -11,12 +11,12 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: "Aether DMX | AI-Powered Architectural Lighting Control",
-  description: "An AI-powered lighting OS that replaces $15k controllers with smarter, modular, offline-capable brains. Architectural DMX control for churches, theaters, and venues.",
+  description: "An AI-powered lighting OS designed to reduce reliance on expensive proprietary controllers while remaining modular and offline-capable. Architectural DMX control for churches, theaters, and venues.",
   keywords: ["architectural DMX control", "AI lighting control", "DMX lighting OS", "offline lighting controller", "ESP32 DMX", "Raspberry Pi lighting"],
   authors: [{ name: "Aether DMX" }],
   openGraph: {
     title: "Aether DMX | AI-Powered Architectural Lighting Control",
-    description: "An AI-powered lighting OS that replaces $15k controllers with smarter, modular, offline-capable brains.",
+    description: "An AI-powered lighting OS designed to reduce reliance on expensive proprietary controllers while remaining modular and offline-capable.",
     type: "website",
     locale: "en_US",
     siteName: "Aether DMX",
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Aether DMX | AI-Powered Architectural Lighting Control",
-    description: "An AI-powered lighting OS that replaces $15k controllers with smarter, modular, offline-capable brains.",
+    description: "An AI-powered lighting OS designed to reduce reliance on expensive proprietary controllers while remaining modular and offline-capable.",
   },
   robots: {
     index: true,
