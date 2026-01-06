@@ -3,6 +3,7 @@ import path from 'path'
 import matter from 'gray-matter'
 import { remark } from 'remark'
 import html from 'remark-html'
+import type { Processor } from 'unified'
 
 const docsPath = path.join(process.cwd(), 'content', 'docs')
 
@@ -31,8 +32,10 @@ export async function getDocBySlug(slug: string): Promise<{ meta: DocMeta; conte
   try {
     const raw = await fs.promises.readFile(full, 'utf8')
     const { data, content } = matter(raw)
-    const processed = await remark().use(html).process(content)
-    const contentHtml = processed.toString()
+    const result = await remark()
+      .use(html as any)
+      .process(content)
+    const contentHtml = result.toString()
     return { meta: data as DocMeta, contentHtml }
   } catch (e) {
     return null
