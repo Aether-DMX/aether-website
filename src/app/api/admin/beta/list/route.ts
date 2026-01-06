@@ -29,9 +29,10 @@ export async function GET() {
 
     return NextResponse.json({ ok: true, signups: data || [] });
   } catch (error) {
-    console.error('List error:', error instanceof Error ? error.message : 'Unknown error');
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    console.error('List error:', errorMessage);
     return NextResponse.json(
-      { ok: false, error: 'Internal server error' },
+      { ok: false, error: errorMessage },
       { status: 500 }
     );
   }
