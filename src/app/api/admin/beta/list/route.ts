@@ -1,8 +1,8 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { isAdminAuthenticated } from '@/lib/adminSession';
 import { createSupabaseAdminClient } from '@/lib/supabaseAdmin';
 
-export async function GET() {
+export async function GET(request: NextRequest) {
   try {
     // Check auth
     let isAuthed = false;
@@ -17,6 +17,10 @@ export async function GET() {
       return NextResponse.json({ ok: false, error: 'Unauthorized' }, { status: 401 });
     }
 
+    // Get status filter from query params
+    const { searchParams } = new URL(request.url);
+    const statusFilter = searchParams.get('status') || 'pending';
+
     // Create Supabase client
     let supabase;
     try {
@@ -26,12 +30,25 @@ export async function GET() {
       return NextResponse.json({ ok: false, error: `Supabase client failed: ${msg}` }, { status: 500 });
     }
 
-    // Query
-    const { data, error } = await supabase
-      .from('beta_signups')
-      .select('signup_id,email,full_name,company,role,venue_type,current_system,experience_level,created_at,interest_reason')
-      .eq('status', 'pending')
-      .order('created_at', { ascending: false });
+    // Query based on status filter
+    const columns = 'signup_id,email,full_name,company,role,venue_type,current_system,experience_level,created_at,interest_reason,status';
+
+    let data, error;
+    if (statusFilter === 'approved') {
+      // Get approved and invited statuses
+      ({ data, error } = await supabase
+        .from('beta_signups')
+        .select(columns)
+        .in('status', ['approved', 'invited'])
+        .order('created_at', { ascending: false }));
+    } else {
+      // Get pending
+      ({ data, error } = await supabase
+        .from('beta_signups')
+        .select(columns)
+        .eq('status', 'pending')
+        .order('created_at', { ascending: false }));
+    }
 
     if (error) {
       return NextResponse.json({ ok: false, error: `Query failed: ${error.message}` }, { status: 500 });

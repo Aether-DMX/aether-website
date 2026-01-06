@@ -1,9 +1,15 @@
+type QueryResult = Promise<{ data: unknown[] | null; error: { message: string } | null }>;
+
 interface SupabaseAdminClient {
   from: (table: string) => {
     select: (columns: string) => {
       eq: (column: string, value: string) => {
-        order: (column: string, options: { ascending: boolean }) => Promise<{ data: unknown[] | null; error: { message: string } | null }>;
+        order: (column: string, options: { ascending: boolean }) => QueryResult;
       };
+      in: (column: string, values: string[]) => {
+        order: (column: string, options: { ascending: boolean }) => QueryResult;
+      };
+      order: (column: string, options: { ascending: boolean }) => QueryResult;
     };
     update: (data: Record<string, unknown>) => {
       eq: (column: string, value: string) => Promise<{ data: unknown | null; error: { message: string } | null }>;
@@ -26,26 +32,47 @@ export function createSupabaseAdminClient(): SupabaseAdminClient {
     Prefer: 'return=representation',
   };
 
+  const executeQuery = async (url: URL): QueryResult => {
+    const response = await fetch(url.toString(), { headers });
+    if (!response.ok) {
+      const errorText = await response.text();
+      return { data: null, error: { message: errorText } };
+    }
+    const data = await response.json();
+    return { data, error: null };
+  };
+
   return {
     from: (table: string) => ({
-      select: (columns: string) => ({
-        eq: (column: string, value: string) => ({
-          order: async (orderColumn: string, options: { ascending: boolean }) => {
-            const url = new URL(`${supabaseUrl}/rest/v1/${table}`);
-            url.searchParams.set('select', columns);
-            url.searchParams.set(column, `eq.${value}`);
-            url.searchParams.set('order', `${orderColumn}.${options.ascending ? 'asc' : 'desc'}`);
+      select: (columns: string) => {
+        const baseUrl = new URL(`${supabaseUrl}/rest/v1/${table}`);
+        baseUrl.searchParams.set('select', columns);
 
-            const response = await fetch(url.toString(), { headers });
-            if (!response.ok) {
-              const errorText = await response.text();
-              return { data: null, error: { message: errorText } };
-            }
-            const data = await response.json();
-            return { data, error: null };
+        return {
+          eq: (column: string, value: string) => {
+            baseUrl.searchParams.set(column, `eq.${value}`);
+            return {
+              order: async (orderColumn: string, options: { ascending: boolean }) => {
+                baseUrl.searchParams.set('order', `${orderColumn}.${options.ascending ? 'asc' : 'desc'}`);
+                return executeQuery(baseUrl);
+              },
+            };
           },
-        }),
-      }),
+          in: (column: string, values: string[]) => {
+            baseUrl.searchParams.set(column, `in.(${values.join(',')})`);
+            return {
+              order: async (orderColumn: string, options: { ascending: boolean }) => {
+                baseUrl.searchParams.set('order', `${orderColumn}.${options.ascending ? 'asc' : 'desc'}`);
+                return executeQuery(baseUrl);
+              },
+            };
+          },
+          order: async (orderColumn: string, options: { ascending: boolean }) => {
+            baseUrl.searchParams.set('order', `${orderColumn}.${options.ascending ? 'asc' : 'desc'}`);
+            return executeQuery(baseUrl);
+          },
+        };
+      },
       update: (updateData: Record<string, unknown>) => ({
         eq: async (column: string, value: string) => {
           const url = new URL(`${supabaseUrl}/rest/v1/${table}`);
