@@ -28,7 +28,16 @@ export async function POST(request: NextRequest) {
     if (!invokeResult.ok) {
       console.error('Edge function error:', invokeResult.error);
       return NextResponse.json(
-        { ok: false, error: invokeResult.error || 'Failed to resend invite email' },
+        {
+          ok: false,
+          error: invokeResult.error || 'Failed to resend invite email',
+          debug: {
+            hasSecret: !!process.env.AETHER_INVITE_SECRET,
+            secretLength: process.env.AETHER_INVITE_SECRET?.length || 0,
+            secretPrefix: process.env.AETHER_INVITE_SECRET?.substring(0, 10) || 'N/A',
+            hasSupabaseUrl: !!process.env.NEXT_PUBLIC_SUPABASE_URL
+          }
+        },
         { status: 502 }
       );
     }
