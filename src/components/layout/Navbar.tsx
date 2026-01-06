@@ -6,9 +6,12 @@ import { useState } from 'react';
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  // Feature flag to control visibility of the Pricing nav link
+  const SHOW_PRICING = false;
+
   const navLinks = [
     { href: '/#features', label: 'Features' },
-    { href: '/#pricing', label: 'Pricing' },
+    ...(SHOW_PRICING ? [{ href: '/#pricing', label: 'Pricing' }] : []),
     { href: '/hardware', label: 'Hardware Guide' },
     { href: '/docs', label: 'Docs' },
   ];
