@@ -1,6 +1,7 @@
 import Link from 'next/link';
 
 // Feature flag: toggle pricing visibility in production
+// Set to `true` to show the full pricing UI; set to `false` to remove the section entirely.
 const SHOW_PRICING = false;
 
 const pricingTiers = [
@@ -67,22 +68,7 @@ const pricingTiers = [
 ];
 
 export default function Pricing() {
-  if (!SHOW_PRICING) {
-    return (
-      <section id="pricing" className="py-24 lg:py-32 bg-[#111114]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4">
-              Pricing
-            </h2>
-            <p className="text-lg text-[#71717a] max-w-2xl mx-auto">
-              Private beta is free during testing. Launch pricing will be announced to beta members first.
-            </p>
-          </div>
-        </div>
-      </section>
-    );
-  }
+  if (!SHOW_PRICING) return null;
 
   return (
     <section id="pricing" className="py-24 lg:py-32 bg-[#111114]">
