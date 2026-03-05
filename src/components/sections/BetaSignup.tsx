@@ -14,6 +14,7 @@ interface FormData {
   country: string;
   currentSystem: string;
   comfortLevel: string;
+  howHeard: string;
   goals: string;
 }
 
@@ -36,6 +37,7 @@ export default function BetaSignup() {
     country: '',
     currentSystem: '',
     comfortLevel: '',
+    howHeard: '',
     goals: '',
   });
 
@@ -143,7 +145,7 @@ export default function BetaSignup() {
         current_system: formData.currentSystem.trim() || null,
         experience_level: experienceMapping[formData.comfortLevel] || 'intermediate',
         interest_reason: formData.goals.trim() || null,
-        how_heard: null,
+        how_heard: formData.howHeard || null,
         wants_hardware: formData.comfortLevel === 'yes',
         newsletter_opt_in: true,
         utm_source: utmParams.utm_source || null,
@@ -441,6 +443,30 @@ export default function BetaSignup() {
                 {errors.comfortLevel && (
                   <p className="mt-1 text-sm text-red-500">{errors.comfortLevel}</p>
                 )}
+              </div>
+
+              {/* How Heard */}
+              <div>
+                <label htmlFor="howHeard" className="block text-sm font-medium text-white mb-2">
+                  Where did you hear about us?
+                </label>
+                <select
+                  id="howHeard"
+                  name="howHeard"
+                  value={formData.howHeard}
+                  onChange={handleChange}
+                  className="w-full bg-[#0a0a0c] border border-[#1f1f24] rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-[#00d4ff] transition-all"
+                >
+                  <option value="">Select an option</option>
+                  <option value="google">Google Search</option>
+                  <option value="youtube">YouTube</option>
+                  <option value="reddit">Reddit</option>
+                  <option value="discord">Discord</option>
+                  <option value="social_media">Social Media</option>
+                  <option value="friend">Friend / Colleague</option>
+                  <option value="blog">Blog / Article</option>
+                  <option value="other">Other</option>
+                </select>
               </div>
 
               {/* Goals */}
