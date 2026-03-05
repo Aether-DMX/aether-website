@@ -6,12 +6,8 @@ import { useState } from 'react';
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // Feature flag to control visibility of the Pricing nav link
-  const SHOW_PRICING = false;
-
   const navLinks = [
     { href: '/#features', label: 'Features' },
-    ...(SHOW_PRICING ? [{ href: '/#pricing', label: 'Pricing' }] : []),
     { href: '/hardware', label: 'Hardware Guide' },
     { href: '/docs', label: 'Docs' },
   ];
@@ -23,8 +19,7 @@ export default function Navbar() {
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
             <div className="relative">
-              {/* Header logo image - place `aether-logo.png` in the `public/` folder */}
-              <img src="/aether-logo.png" alt="Aether logo" className="w-9 h-9 rounded-lg object-cover logo-dmx" />
+              <img src="/aether-icon.svg" alt="Aether logo" className="w-9 h-9 object-contain" />
             </div>
             <span className="text-xl font-bold tracking-tight">
               Aether <span className="text-[#00d4ff]">DMX</span>

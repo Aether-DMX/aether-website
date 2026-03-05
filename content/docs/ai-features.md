@@ -1,35 +1,35 @@
 ---
 title: "AETHER DMX — AI Features"
-description: "Using the AI Scene Builder, natural language commands, and cloud AI capabilities in AETHER DMX."
+description: "Using the AI scene builder, natural language commands, voice control, and intelligent automation in AETHER DMX."
 order: 5
 version: "v0.9 Beta"
 ---
 
 # AI Features Guide
 
-Discover how to use AETHER's AI-powered scene builder, natural language commands, and intelligent automation to streamline your lighting design workflow.
+Discover how to use AETHER's AI-powered scene builder, natural language commands, voice control, and intelligent automation to streamline your lighting design workflow.
 
-> ⚠️ **Beta Notice**  
-> AI features in AETHER DMX are under active development. Some advanced behaviors described in this guide may be limited, refined, or unavailable during early beta. Core scene generation and natural language commands are functional; advanced automation features are being expanded.
+> **Beta Notice**
+> AI features in AETHER DMX are under active development. Core scene generation and natural language commands are functional. Advanced automation features are being expanded throughout the beta period.
 
 ## Introduction to AETHER AI
 
-AETHER DMX integrates Claude AI to transform how you create and control lighting. Instead of manually programming every parameter, simply describe what you want in natural language, and the AI generates professional lighting configurations.
+AETHER DMX integrates AI to transform how you create and control lighting. Instead of manually programming every parameter, simply describe what you want in plain English — or say it out loud — and the system generates professional lighting configurations.
 
 ### What AI Can Do
 
-- Generate complete scenes from descriptions
+- Generate complete scenes from text or voice descriptions
 - Create chases and effects from natural language
-- Build show timelines with cued changes (where available)
+- Build show timelines with cued changes
 - Schedule lighting based on time of day
 - Suggest fixture patches and groups
-- Troubleshoot issues and optimize output (in supported modes)
+- Troubleshoot issues and optimize output
 
 ### AI Modes
 
-**Local Mode:** AI features are disabled. All control is manual through the touch interface. No internet required.
+**Local Mode:** AI features are disabled. All control is manual through the interface. No internet required.
 
-**Hybrid Mode:** AI features available when internet connected. Core control works offline. Recommended for most users.
+**Hybrid Mode (Recommended):** AI features available when internet connected. Core control works offline. Best of both worlds.
 
 **Cloud Mode:** Full AI capabilities including advanced scene analysis. Requires internet connection.
 
@@ -37,7 +37,7 @@ AETHER DMX integrates Claude AI to transform how you create and control lighting
 
 ### Accessing the Assistant
 
-Tap the **AI button** (star icon) from any screen to open the assistant panel. You can also say commands aloud if voice mode is enabled.
+Tap the **AI button** (star icon) from any screen to open the assistant panel. You can also speak commands aloud when voice mode is enabled in Settings.
 
 ### Conversation Style
 
@@ -62,7 +62,7 @@ Here are effective ways to communicate with the AI:
 ```
 "Make a warm, cozy scene at 40%"
 "Create a blue wash for the stage with a bit of purple"
-"Set up a presentation look - bright white on stage, dim in house"
+"Set up a presentation look — bright white on stage, dim in house"
 "Design a romantic dinner atmosphere"
 "Give me a dramatic red look for the concert"
 ```
@@ -93,31 +93,27 @@ Here are effective ways to communicate with the AI:
 "Create an evening schedule that gradually warms the lights"
 ```
 
+## Voice Control
+
+### How It Works
+
+AETHER supports voice commands through a built-in speech recognition system. Enable voice mode in **Settings > AI > Voice Control**, then speak naturally — the system transcribes your voice and processes it as an AI command.
+
+### Tips for Voice Commands
+
+- Speak clearly and at a normal pace
+- Use the same natural language you'd type
+- Voice mode works alongside the text assistant — use whichever is easier in the moment
+
 ## The Scene Builder
 
 ### AI-Assisted Design Flow
 
-1. Describe your desired look to the AI
-2. Review the generated ALDL (Aether Lighting Design Language) code
-3. Preview on a sandbox universe or visualizer
+1. Describe your desired look to the AI (text or voice)
+2. Review the generated scene configuration
+3. Preview on your fixtures before going live
 4. Make adjustments via conversation or manual editing
 5. Go live with a smooth crossfade
-
-### ALDL Output
-
-The AI generates human-readable ALDL code that you can save, edit, and reuse:
-
-```
-scene "Warm Welcome" {
-  fade_in: 1.5s
-  fade_out: 1.0s
-  curve: s_curve
-  steps: [
-    group("Front Wash").intensity(55%).ct(3200K),
-    group("Back RGB").color("#FF7A00").intensity(35%)
-  ]
-}
-```
 
 ### Preview vs Go Live
 
@@ -166,7 +162,7 @@ The AI can analyze your patch and suggest useful groups:
 
 ```
 You: Suggest some groups for my current patch
-AI: Based on your fixture addresses and types, I recommend:
+AI: Based on your fixture layout, I recommend:
     - "All RGB" (fixtures 1-20)
     - "Stage Left" (fixtures 1-6)
     - "Stage Right" (fixtures 15-20)
@@ -176,11 +172,11 @@ AI: Based on your fixture addresses and types, I recommend:
 
 ## Advanced AI Features
 
-The following features demonstrate the AI's expanding capabilities. Availability and behavior may vary during beta as these features are refined.
+The following features demonstrate the AI's expanding capabilities. Availability may vary during beta as these features are refined.
 
 ### Style Presets
 
-Request looks by style name for quick setup (preset library expanding):
+Request looks by style name for quick setup:
 
 - **Retail Warm**: Inviting, comfortable retail lighting
 - **Gallery Neutral**: Clean, even museum-quality lighting
@@ -201,14 +197,14 @@ AI: I'll create a schedule with:
     Want me to add a gradual transition between each?
 ```
 
-### Learning from Feedback (Planned Capability)
+### Learning from Feedback (Planned)
 
-In Cloud Mode, the AI can adapt to your preferences over time. These features are being developed and may have limited availability during beta:
+In Cloud Mode, the AI will adapt to your preferences over time:
 
-- Remembers your preferred color temperatures (where available)
+- Remembers your preferred color temperatures
 - Notes which scenes you modify most
 - Adapts suggestions based on your venue type
-- Improves accuracy based on feedback
+- Improves accuracy based on your feedback
 
 ## Troubleshooting with AI
 
@@ -218,9 +214,9 @@ Ask the AI to help diagnose issues:
 
 ```
 You: Some of my fixtures aren't responding
-AI: Let me check. I see Pulse-002 hasn't reported in 2 minutes.
+AI: Let me check. I see Node 2 hasn't reported in 2 minutes.
     This could be a WiFi issue. Try these steps:
-    1. Check that Pulse-002 is powered on
+    1. Check that the node is powered on
     2. Verify WiFi signal strength
     3. Check the DMX cable connection
     Would you like me to send an identify command to that node?
@@ -228,7 +224,7 @@ AI: Let me check. I see Pulse-002 hasn't reported in 2 minutes.
 
 ### Output Optimization
 
-The AI can improve DMX output quality:
+The AI can help improve DMX output quality:
 
 ```
 You: I'm seeing stepping on my pan/tilt movements

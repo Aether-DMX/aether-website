@@ -39,7 +39,7 @@ From the main menu, tap **Patch** to open the patching interface. The editor sho
 6. Optionally assign to a group
 7. Tap **Patch** to confirm
 
-> ℹ️ **Note**  
+> **Note**
 > AETHER automatically checks for address conflicts and will warn you if fixtures overlap.
 
 ### Fixture Library
@@ -78,13 +78,7 @@ New installations start with Universe 1. To add additional universes:
 
 ### Universe Assignment
 
-Each universe must be assigned to a Pulse node for physical output. A single Pulse node can output 1-2 universes depending on hardware configuration.
-
-| Pulse Model | Max Universes | Notes |
-|-------------|---------------|-------|
-| Pulse Basic | 1 | Single MAX485 output |
-| Pulse Dual | 2 | Dual MAX485 outputs |
-| Pulse Pro (planned) | 4 | Multiple outputs with failover |
+Each universe must be assigned to a Pulse node for physical output. A single Pulse node can output 1-2 universes depending on configuration.
 
 ### Virtual Universes
 
@@ -133,33 +127,33 @@ For fixtures not in the library, create a custom profile:
 
 ### Profile Channel Types
 
-| Channel Type | Function | Merge Mode |
-|--------------|----------|------------|
-| Intensity | Master dimmer | HTP |
-| Red | Red color component | HTP |
-| Green | Green color component | HTP |
-| Blue | Blue color component | HTP |
-| White | White/CTO channel | HTP |
-| Amber | Amber channel | HTP |
-| Pan | Horizontal position | LTP |
-| Tilt | Vertical position | LTP |
-| Pan Fine | 16-bit pan (LSB) | LTP |
-| Tilt Fine | 16-bit tilt (LSB) | LTP |
-| Color Wheel | Fixed color selection | LTP |
-| Gobo | Pattern selection | LTP |
-| Gobo Rotation | Rotating gobo speed | LTP |
-| Prism | Prism insertion/rotation | LTP |
-| Focus | Beam focus | LTP |
-| Zoom | Beam angle | LTP |
-| Strobe | Strobe effect | LTP |
-| Control | Fixture control channel | LTP |
+| Channel Type | Function |
+|--------------|----------|
+| Intensity | Master dimmer |
+| Red | Red color component |
+| Green | Green color component |
+| Blue | Blue color component |
+| White | White/CTO channel |
+| Amber | Amber channel |
+| Pan | Horizontal position |
+| Tilt | Vertical position |
+| Pan Fine | 16-bit pan |
+| Tilt Fine | 16-bit tilt |
+| Color Wheel | Fixed color selection |
+| Gobo | Pattern selection |
+| Gobo Rotation | Rotating gobo speed |
+| Prism | Prism insertion/rotation |
+| Focus | Beam focus |
+| Zoom | Beam angle |
+| Strobe | Strobe effect |
+| Control | Fixture control channel |
 
-### Importing GDTF/Fixture Profiles
+### Importing Fixture Profiles
 
 AETHER supports importing fixture definitions in GDTF format (General Device Type Format). Download .gdtf files from the Open Fixture Library and import via **Patch > Import Profile**.
 
-> ⚠️ **Warning**  
-> GDTF import is experimental during beta and may not fully support advanced fixture features. Some modes, macros, and wheel definitions may require manual adjustment. Always verify channel mappings after import.
+> **Note**
+> GDTF import is experimental during beta and may not fully support advanced fixture features. Always verify channel mappings after import.
 
 ## Address Allocation
 
@@ -186,15 +180,15 @@ Let AETHER automatically assign addresses:
 
 ## RDM Support (Advanced)
 
-Remote Device Management allows two-way communication with RDM-compatible fixtures. RDM support is hardware-dependent and not guaranteed across all Pulse node versions or fixture combinations:
+Remote Device Management allows two-way communication with RDM-compatible fixtures:
 
 - **Identify**: Flash a fixture to locate it physically
 - **Set Address**: Change fixture DMX address remotely
 - **Set Mode**: Switch fixture personality/mode
 - **Get Info**: Read firmware version, lamp hours, errors
 
-> ⚠️ **Warning**  
-> RDM requires compatible Pulse node hardware, appropriate firmware, and RDM-enabled fixtures. Availability varies by configuration and is not supported on all setups.
+> **Note**
+> RDM requires compatible hardware and RDM-enabled fixtures. Availability may vary by configuration during beta.
 
 ## Backup and Restore
 

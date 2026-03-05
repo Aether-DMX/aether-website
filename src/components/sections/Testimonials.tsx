@@ -1,92 +1,104 @@
-const testimonials = [
+'use client';
+
+const audiences = [
   {
-    quote: "This does what our $12k controller couldn't. The AI scene builder alone has saved us hours of programming time.",
-    author: "Michael Chen",
-    role: "Technical Director",
-    organization: "800-seat Church",
-    avatar: 'MC',
+    title: 'Churches',
+    description: 'Simplify weekly programming and let volunteers run the lights with confidence. AI handles the complexity so your team can focus on the service.',
+    icon: (
+      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" />
+      </svg>
+    ),
+    highlights: ['Volunteer-friendly interface', 'AI scene suggestions', 'Scheduled lighting automation'],
+    gradient: 'from-[#a855f7] to-[#7c3aed]',
   },
   {
-    quote: "Finally, a DMX system that doesn't require a proprietary hardware investment. Running this on a Raspberry Pi is brilliant.",
-    author: "Sarah Rodriguez",
-    role: "Lighting Designer",
-    organization: "Regional Theater",
-    avatar: 'SR',
+    title: 'Theaters',
+    description: 'Full cue stacks, crossfades, and multi-universe control. Everything you need for a production, running on hardware you already understand.',
+    icon: (
+      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3.375 19.5h17.25m-17.25 0a1.125 1.125 0 01-1.125-1.125M3.375 19.5h1.5C5.496 19.5 6 18.996 6 18.375m-3.75 0V5.625m0 12.75v-1.5c0-.621.504-1.125 1.125-1.125m18.375 2.625V5.625m0 12.75c0 .621-.504 1.125-1.125 1.125m1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125m0 3.75h-1.5A1.125 1.125 0 0118 18.375M20.625 4.5H3.375m17.25 0c.621 0 1.125.504 1.125 1.125M20.625 4.5h-1.5C18.504 4.5 18 5.004 18 5.625m3.75 0v1.5c0 .621-.504 1.125-1.125 1.125M3.375 4.5c-.621 0-1.125.504-1.125 1.125M3.375 4.5h1.5C5.496 4.5 6 5.004 6 5.625m-3.75 0v1.5c0 .621.504 1.125 1.125 1.125m0 0h1.5m-1.5 0c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125m1.5-3.75C5.496 8.25 6 7.746 6 7.125v-1.5M4.875 8.25C5.496 8.25 6 8.754 6 9.375v1.5m0-5.25v5.25m0-5.25C6 5.004 6.504 4.5 7.125 4.5h9.75c.621 0 1.125.504 1.125 1.125m1.125 2.625h1.5m-1.5 0A1.125 1.125 0 0118 7.125v-1.5m1.125 2.625c-.621 0-1.125.504-1.125 1.125v1.5m2.625-2.625c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125M18 5.625v5.25M7.125 12h9.75m-9.75 0A1.125 1.125 0 016 10.875M7.125 12C6.504 12 6 12.504 6 13.125m0-2.25C6 11.496 5.496 12 4.875 12M18 10.875c0 .621-.504 1.125-1.125 1.125M18 10.875c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125m-12 5.25v-5.25m0 5.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125m-12 0v-1.5c0-.621-.504-1.125-1.125-1.125M18 18.375v-5.25m0 5.25v-1.5c0-.621.504-1.125 1.125-1.125M18 13.125v1.5c0 .621.504 1.125 1.125 1.125M18 13.125c0-.621.504-1.125 1.125-1.125M6 13.125v1.5c0 .621-.504 1.125-1.125 1.125M6 13.125C6 12.504 5.496 12 4.875 12m-1.5 0h1.5m-1.5 0c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125M19.125 12h1.5m0 0c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h1.5m14.25 0h1.5" />
+      </svg>
+    ),
+    highlights: ['Full cue stack support', 'Multi-universe control', 'Moving head support'],
+    gradient: 'from-[#00d4ff] to-[#0099cc]',
   },
   {
-    quote: "The offline-first approach was crucial for us. Our venue has unreliable internet, and Aether just works.",
-    author: "David Park",
-    role: "AV Director",
-    organization: "Corporate Event Center",
-    avatar: 'DP',
+    title: 'Venues & Events',
+    description: 'Reliable scheduled lighting that just works. Set it and forget it, or control live from any device. Perfect for restaurants, bars, and event spaces.',
+    icon: (
+      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+    ),
+    highlights: ['Time-based scheduling', 'Remote access from any device', 'Works offline'],
+    gradient: 'from-[#f59e0b] to-[#d97706]',
   },
   {
-    quote: "As an integrator, I'm excited about the modular node architecture. It makes scaling installations so much easier.",
-    author: "James Thompson",
-    role: "System Integrator",
-    organization: "ProLight Systems",
-    avatar: 'JT',
+    title: 'DIY Builders',
+    description: 'Own your system completely. Open hardware designs, no vendor lock-in, and a community of builders to learn from. Your lights, your rules.',
+    icon: (
+      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M11.42 15.17l-5.1-5.1m0 0L11.42 5m-5.1 5.07h13.26" />
+      </svg>
+    ),
+    highlights: ['Open hardware spec', 'Build your own nodes', 'Active community'],
+    gradient: 'from-[#10b981] to-[#059669]',
   },
 ];
 
 export default function Testimonials() {
   return (
-    <section id="testimonials" className="py-24 lg:py-32 bg-[#111114]">
+    <section id="built-for" className="py-24 lg:py-32 bg-[#111114]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4">
-            Designed for <span className="gradient-text">Professionals</span>
+            Built <span className="gradient-text">For</span>
           </h2>
           <p className="text-lg text-[#71717a] max-w-2xl mx-auto">
-            Early beta users are already seeing the difference intelligent lighting control can make.
+            Whether you&apos;re running a weekly service, staging a production, or building
+            your dream setup — AETHER is designed for you.
           </p>
         </div>
 
-        {/* Testimonials Grid */}
+        {/* Audience Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {testimonials.map((testimonial) => (
+          {audiences.map((audience) => (
             <div
-              key={testimonial.author}
+              key={audience.title}
               className="bg-[#0a0a0c] border border-[#1f1f24] rounded-xl p-6 sm:p-8 card-hover"
             >
-              {/* Quote Icon */}
-              <svg
-                className="w-8 h-8 text-[#00d4ff]/30 mb-4"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-              >
-                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-              </svg>
-
-              {/* Quote */}
-              <blockquote className="text-white text-lg mb-6 leading-relaxed">
-                &ldquo;{testimonial.quote}&rdquo;
-              </blockquote>
-
-              {/* Author */}
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#00d4ff] to-[#a855f7] flex items-center justify-center text-black font-semibold text-sm">
-                  {testimonial.avatar}
-                </div>
-                <div>
-                  <p className="text-white font-medium">{testimonial.author}</p>
-                  <p className="text-sm text-[#71717a]">
-                    {testimonial.role}, {testimonial.organization}
-                  </p>
-                </div>
+              {/* Icon */}
+              <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${audience.gradient} flex items-center justify-center mb-5 text-white`}>
+                {audience.icon}
               </div>
+
+              {/* Title */}
+              <h3 className="text-xl font-bold text-white mb-3">{audience.title}</h3>
+
+              {/* Description */}
+              <p className="text-[#71717a] mb-5 leading-relaxed">{audience.description}</p>
+
+              {/* Highlights */}
+              <ul className="space-y-2">
+                {audience.highlights.map((highlight) => (
+                  <li key={highlight} className="flex items-center gap-2">
+                    <svg
+                      className="w-4 h-4 flex-shrink-0 text-[#00d4ff]"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span className="text-sm text-[#a1a1aa]">{highlight}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
           ))}
-        </div>
-
-        {/* Placeholder Note */}
-        <div className="mt-12 text-center">
-          <p className="text-sm text-[#71717a] bg-[#0a0a0c] border border-[#1f1f24] rounded-lg px-4 py-2 inline-block">
-            <span className="text-[#f59e0b]">Beta Note:</span> These are representative testimonials. 
-            Real feedback from beta users coming soon.
-          </p>
         </div>
       </div>
     </section>

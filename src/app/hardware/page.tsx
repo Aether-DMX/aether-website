@@ -31,75 +31,31 @@ const controllerHardware = [
   },
 ];
 
-const dmxNodeBOM = [
-  {
-    component: 'ESP32-S3 DevKit',
-    recommendation: 'ESP32-S3-DevKitC-1 or Wemos S3',
-    quantity: '1 per node',
-    notes: 'Native USB, dual-core, WiFi/Bluetooth. S3 recommended over base ESP32.',
-    link: 'https://www.espressif.com/en/products/devkits/esp32-s3-devkitc-1',
-  },
-  {
-    component: 'RS485 Transceiver',
-    recommendation: 'MAX485 or SN75176 module',
-    quantity: '1–2 per node',
-    notes: 'Use modules with built-in termination. One per DMX universe output.',
-    link: null,
-  },
-  {
-    component: '5-Pin XLR Female',
-    recommendation: 'Neutrik NC5FAH or equivalent',
-    quantity: '1–2 per node',
-    notes: 'Panel-mount for enclosure. 3-pin acceptable but 5-pin preferred.',
-    link: null,
-  },
-  {
-    component: 'Power Supply',
-    recommendation: '5V 2A USB-C or 5V regulated PSU',
-    quantity: '1 per node',
-    notes: 'Ensure stable 5V supply. Avoid cheap adapters that cause brownouts.',
-    link: null,
-  },
-  {
-    component: 'Enclosure',
-    recommendation: 'IP65 junction box or 3D-printed case',
-    quantity: '1 per node',
-    notes: 'Protect from dust and moisture in rack environments.',
-    link: null,
-  },
-  {
-    component: 'Ethernet Module (optional)',
-    recommendation: 'W5500 Ethernet module',
-    quantity: '1 per node',
-    notes: 'For wired networks. WiFi built-in on ESP32-S3.',
-    link: null,
-  },
-];
 
-const touchscreens = [
+const operatingModes = [
   {
-    name: '7" Official Raspberry Pi Display',
-    resolution: '800×480',
-    mount: 'Desktop, VESA, custom bracket',
-    notes: 'Plug-and-play with Pi. Good for compact setups.',
+    name: 'Touchscreen Kiosk',
+    icon: 'monitor',
+    description: 'Dedicated touchscreen display connected to the Pi for a purpose-built lighting console experience.',
+    features: ['Touch-first UI', 'Kiosk mode auto-launch', 'HDMI + USB touch input'],
   },
   {
-    name: '10.1" HDMI Touchscreen',
-    resolution: '1280×800',
-    mount: 'VESA, rack mount kit available',
-    notes: 'Recommended for rack installations. Ensure capacitive touch.',
+    name: 'Tablet / Phone',
+    icon: 'tablet',
+    description: 'Access the Aether UI from any device on AETHER\'s dedicated network through a web browser.',
+    features: ['Any modern browser', 'Responsive mobile UI', 'Multiple users at once'],
   },
   {
-    name: 'Elecrow 7" HDMI Display',
-    resolution: '1024×600',
-    mount: 'Desktop, bracket',
-    notes: 'Budget-friendly option. Works well for portable setups.',
+    name: 'Desktop / Laptop',
+    icon: 'desktop',
+    description: 'Full control from a computer on AETHER\'s network. Great for programming complex shows.',
+    features: ['Mouse + keyboard workflow', 'Large screen layouts', 'Multi-monitor support'],
   },
   {
-    name: 'Waveshare 10.1" HDMI LCD',
-    resolution: '1280×800',
-    mount: 'VESA, rack',
-    notes: 'High build quality. IPS panel for wide viewing angles.',
+    name: 'Headless',
+    icon: 'headless',
+    description: 'Run the Pi with no display attached. Connect from any device on AETHER\'s network to control everything.',
+    features: ['Minimal hardware footprint', 'Access from any browser', 'Scheduled playback + API'],
   },
 ];
 
@@ -139,11 +95,11 @@ export default function HardwarePage() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
             </svg>
             <div>
-              <h3 className="text-[#f59e0b] font-semibold mb-1">Beta Hardware Requirements</h3>
+              <h3 className="text-[#f59e0b] font-semibold mb-1">Beta Hardware Program</h3>
               <p className="text-sm text-[#71717a]">
-                Early beta users are expected to be comfortable with basic hardware assembly. 
-                We provide recommended parts lists and wiring diagrams, but hands-on work is required. 
-                Pre-assembled hardware options are planned for future releases.
+                The first 5 accepted beta users will receive a free DMX node hardware kit.
+                Additional approved beta users will receive a hardware spec sheet to source
+                their own components, or can purchase pre-assembled kits from our upcoming store.
               </p>
             </div>
           </div>
@@ -195,219 +151,118 @@ export default function HardwarePage() {
         </div>
       </section>
 
-      {/* DMX Node BOM */}
+      {/* DMX Nodes */}
       <section className="py-16 lg:py-24 bg-[#111114]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl sm:text-3xl font-bold mb-4">DMX Node Bill of Materials</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold mb-4">DMX Nodes</h2>
           <p className="text-[#71717a] mb-8 max-w-2xl">
-            Each DMX node handles 1–2 universes of DMX output. Build as many nodes as 
-            your installation requires. All components are available from standard electronics suppliers.
+            Each DMX node handles 1–2 universes of DMX output and connects via WiFi or Ethernet
+            on AETHER&apos;s dedicated network. Add as many nodes as your installation requires — there&apos;s no universe limit.
           </p>
 
-          <div className="bg-[#0a0a0c] border border-[#1f1f24] rounded-xl overflow-hidden">
-            <div className="overflow-x-auto">
-              <table className="w-full min-w-[600px]">
-                <thead>
-                  <tr className="border-b border-[#1f1f24]">
-                    <th className="text-left text-xs font-semibold text-[#71717a] uppercase tracking-wider px-6 py-4">
-                      Component
-                    </th>
-                    <th className="text-left text-xs font-semibold text-[#71717a] uppercase tracking-wider px-6 py-4">
-                      Recommendation
-                    </th>
-                    <th className="text-left text-xs font-semibold text-[#71717a] uppercase tracking-wider px-6 py-4">
-                      Quantity
-                    </th>
-                    <th className="text-left text-xs font-semibold text-[#71717a] uppercase tracking-wider px-6 py-4">
-                      Notes
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {dmxNodeBOM.map((item, index) => (
-                    <tr 
-                      key={item.component}
-                      className={index !== dmxNodeBOM.length - 1 ? 'border-b border-[#1f1f24]' : ''}
-                    >
-                      <td className="px-6 py-4">
-                        <span className="text-sm font-medium text-white">{item.component}</span>
-                      </td>
-                      <td className="px-6 py-4">
-                        {item.link ? (
-                          <a 
-                            href={item.link}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-sm text-[#00d4ff] hover:underline"
-                          >
-                            {item.recommendation}
-                          </a>
-                        ) : (
-                          <span className="text-sm text-[#00d4ff]">{item.recommendation}</span>
-                        )}
-                      </td>
-                      <td className="px-6 py-4">
-                        <span className="text-sm text-[#a1a1aa]">{item.quantity}</span>
-                      </td>
-                      <td className="px-6 py-4">
-                        <span className="text-sm text-[#71717a]">{item.notes}</span>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {/* Free Kit */}
+            <div className="bg-[#0a0a0c] border border-[#00d4ff]/30 rounded-xl p-6">
+              <div className="w-10 h-10 rounded-lg bg-[#00d4ff]/10 flex items-center justify-center mb-4">
+                <svg className="w-5 h-5 text-[#00d4ff]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7" />
+                </svg>
+              </div>
+              <h3 className="text-lg font-semibold text-white mb-2">First 5 Beta Users</h3>
+              <p className="text-sm text-[#71717a] mb-4">
+                The first 5 accepted beta participants receive a free pre-assembled
+                DMX node kit — everything you need to get started.
+              </p>
+              <Link href="/#beta" className="text-sm text-[#00d4ff] hover:underline">
+                Apply now →
+              </Link>
             </div>
-          </div>
 
-          {/* Estimated Cost */}
-          <div className="mt-6 p-4 bg-[#0a0a0c] border border-[#1f1f24] rounded-lg">
-            <p className="text-sm text-[#71717a]">
-              <span className="text-white font-medium">Estimated cost per node:</span> $25–$45 USD 
-              depending on component choices and supplier. Quantity discounts available on most parts.
-            </p>
+            {/* DIY */}
+            <div className="bg-[#0a0a0c] border border-[#1f1f24] rounded-xl p-6">
+              <div className="w-10 h-10 rounded-lg bg-[#a855f7]/10 flex items-center justify-center mb-4">
+                <svg className="w-5 h-5 text-[#a855f7]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+                </svg>
+              </div>
+              <h3 className="text-lg font-semibold text-white mb-2">Build Your Own</h3>
+              <p className="text-sm text-[#71717a]">
+                Approved beta users receive a detailed hardware spec sheet with
+                recommended components to source and assemble themselves.
+              </p>
+            </div>
+
+            {/* Store */}
+            <div className="bg-[#0a0a0c] border border-[#1f1f24] rounded-xl p-6">
+              <div className="w-10 h-10 rounded-lg bg-[#f59e0b]/10 flex items-center justify-center mb-4">
+                <svg className="w-5 h-5 text-[#f59e0b]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                </svg>
+              </div>
+              <h3 className="text-lg font-semibold text-white mb-2">Buy Pre-Assembled</h3>
+              <p className="text-sm text-[#71717a]">
+                Don&apos;t want to build? Pre-assembled DMX node kits will be
+                available for purchase in our upcoming store.
+              </p>
+              <span className="inline-block mt-4 text-xs font-medium px-2 py-1 rounded bg-[#f59e0b]/20 text-[#f59e0b]">
+                Coming Soon
+              </span>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Touchscreens */}
+      {/* Operating Modes */}
       <section className="py-16 lg:py-24 bg-[#0a0a0c]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl sm:text-3xl font-bold mb-4">Touchscreen Displays</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold mb-4">Ways to Control</h2>
           <p className="text-[#71717a] mb-8 max-w-2xl">
-            Aether DMX is designed for touch-first operation. Any HDMI display with 
-            USB touch input will work, but these are tested and recommended.
+            Aether DMX runs as a web app on its own dedicated network — separate from
+            your venue WiFi. Access it from any device — no special software to install.
           </p>
 
           <div className="grid sm:grid-cols-2 gap-6">
-            {touchscreens.map((screen) => (
+            {operatingModes.map((mode) => (
               <div
-                key={screen.name}
+                key={mode.name}
                 className="bg-[#111114] border border-[#1f1f24] rounded-xl p-6"
               >
-                <h3 className="text-lg font-semibold text-white mb-2">{screen.name}</h3>
-                <div className="space-y-2 text-sm">
-                  <p>
-                    <span className="text-[#71717a]">Resolution:</span>{' '}
-                    <span className="text-[#00d4ff]">{screen.resolution}</span>
-                  </p>
-                  <p>
-                    <span className="text-[#71717a]">Mounting:</span>{' '}
-                    <span className="text-white">{screen.mount}</span>
-                  </p>
-                  <p className="text-[#71717a]">{screen.notes}</p>
+                <div className="flex items-center gap-3 mb-3">
+                  {mode.icon === 'monitor' && (
+                    <svg className="w-6 h-6 text-[#00d4ff]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                  )}
+                  {mode.icon === 'tablet' && (
+                    <svg className="w-6 h-6 text-[#a855f7]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                    </svg>
+                  )}
+                  {mode.icon === 'desktop' && (
+                    <svg className="w-6 h-6 text-[#f59e0b]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                  )}
+                  {mode.icon === 'headless' && (
+                    <svg className="w-6 h-6 text-[#22c55e]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
+                    </svg>
+                  )}
+                  <h3 className="text-lg font-semibold text-white">{mode.name}</h3>
                 </div>
+                <p className="text-sm text-[#71717a] mb-4">{mode.description}</p>
+                <ul className="space-y-1.5">
+                  {mode.features.map((feature) => (
+                    <li key={feature} className="flex items-center gap-2 text-sm text-[#a1a1aa]">
+                      <svg className="w-3.5 h-3.5 text-[#00d4ff] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Network Topology */}
-      <section className="py-16 lg:py-24 bg-[#111114]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl sm:text-3xl font-bold mb-4">Network Topology</h2>
-          <p className="text-[#71717a] mb-8 max-w-2xl">
-            Aether DMX uses standard Ethernet for communication between the controller 
-            and DMX nodes. No specialized networking hardware required.
-          </p>
-
-          <div className="grid lg:grid-cols-2 gap-8">
-            {/* Local/Offline Topology */}
-            <div className="bg-[#0a0a0c] border border-[#1f1f24] rounded-xl p-6">
-              <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
-                <span className="w-3 h-3 rounded-full bg-[#a855f7]" />
-                Local / Offline Network
-              </h3>
-              <div className="bg-[#111114] rounded-lg p-6 mb-4">
-                {/* Simple ASCII-style diagram */}
-                <pre className="text-xs sm:text-sm text-[#71717a] font-mono overflow-x-auto">
-{`┌─────────────────┐
-│   Controller    │
-│  (Raspberry Pi) │
-└────────┬────────┘
-         │
-┌────────┴────────┐
-│  Network Switch │
-│   (Unmanaged)   │
-└──┬─────┬─────┬──┘
-   │     │     │
-┌──┴──┐┌─┴─┐┌──┴──┐
-│Node1││N2 ││Node3│
-└──┬──┘└─┬─┘└──┬──┘
-   │     │     │
-  DMX   DMX   DMX
-Fixtures`}
-                </pre>
-              </div>
-              <ul className="space-y-2 text-sm text-[#71717a]">
-                <li className="flex items-start gap-2">
-                  <svg className="w-4 h-4 text-[#a855f7] mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                  No internet connection required
-                </li>
-                <li className="flex items-start gap-2">
-                  <svg className="w-4 h-4 text-[#a855f7] mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                  All processing happens on local controller
-                </li>
-                <li className="flex items-start gap-2">
-                  <svg className="w-4 h-4 text-[#a855f7] mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                  Ideal for secure or air-gapped environments
-                </li>
-              </ul>
-            </div>
-
-            {/* Hybrid/Cloud Topology */}
-            <div className="bg-[#0a0a0c] border border-[#1f1f24] rounded-xl p-6">
-              <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
-                <span className="w-3 h-3 rounded-full bg-[#00d4ff]" />
-                Hybrid / Cloud Network
-              </h3>
-              <div className="bg-[#111114] rounded-lg p-6 mb-4">
-                <pre className="text-xs sm:text-sm text-[#71717a] font-mono overflow-x-auto">
-{`         ┌─────────────┐
-         │ Aether Cloud│
-         │   (AI/Sync) │
-         └──────┬──────┘
-                │ Internet
-┌───────────────┴───────────────┐
-│            Router             │
-└───────────────┬───────────────┘
-         ┌──────┴──────┐
-         │   Controller │
-         └──────┬──────┘
-         ┌──────┴──────┐
-         │   Switch    │
-         └──┬────┬────┬┘
-            │    │    │
-          Nodes → DMX → Fixtures`}
-                </pre>
-              </div>
-              <ul className="space-y-2 text-sm text-[#71717a]">
-                <li className="flex items-start gap-2">
-                  <svg className="w-4 h-4 text-[#00d4ff] mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                  Cloud AI features when online
-                </li>
-                <li className="flex items-start gap-2">
-                  <svg className="w-4 h-4 text-[#00d4ff] mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                  Continues to function fully offline
-                </li>
-                <li className="flex items-start gap-2">
-                  <svg className="w-4 h-4 text-[#00d4ff] mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                  Remote monitoring and multi-site sync
-                </li>
-              </ul>
-            </div>
           </div>
         </div>
       </section>
@@ -425,10 +280,9 @@ Fixtures`}
                 wiring configurations is at your own risk.
               </p>
               <p>
-                <strong className="text-white">Electrical Safety:</strong> DMX nodes involve low-voltage 
-                DC electronics. Ensure proper isolation between DMX/RS485 signals and AC power. 
-                If you&apos;re not comfortable with basic electronics, we recommend waiting for 
-                pre-assembled hardware options.
+                <strong className="text-white">Electrical Safety:</strong> DMX nodes use standard
+                low-voltage connections. If you&apos;re not comfortable with basic electronics,
+                we recommend purchasing a pre-assembled kit from our upcoming store.
               </p>
               <p>
                 <strong className="text-white">Best Experience:</strong> For the most reliable 
@@ -444,10 +298,10 @@ Fixtures`}
       {/* CTA */}
       <section className="py-16 lg:py-24 bg-[#111114] border-t border-[#1f1f24]">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-2xl sm:text-3xl font-bold mb-4">Ready to Build?</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold mb-4">Ready to Get Started?</h2>
           <p className="text-[#71717a] mb-8">
-            Join the beta to get access to detailed wiring diagrams, firmware downloads, 
-            and step-by-step assembly guides.
+            Join the beta to get firmware access, hardware specs, and full setup
+            support. The first 5 users get a free hardware kit.
           </p>
           <Link href="/#beta" className="btn-primary inline-block">
             Apply for Private Beta

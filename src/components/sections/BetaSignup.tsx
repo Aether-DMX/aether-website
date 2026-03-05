@@ -3,8 +3,8 @@
 import { useState, useEffect } from 'react';
 
 // Supabase configuration
-const SUPABASE_URL = 'https://bremtbubaehnbeobwksj.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJyZW10YnViYWVobmJlb2J3a3NqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjUzNjcwODAsImV4cCI6MjA4MDk0MzA4MH0.bWa5bJm7RtxljvIa1xJbH5jqiZVa5y7-MwCS5fVkunA';
+const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
+const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
 
 interface FormData {
   name: string;
@@ -236,12 +236,13 @@ export default function BetaSignup() {
           {/* Content */}
           <div>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-6">
-              Join the <span className="gradient-text">Private Beta</span>
+              The Beta Is Live.{' '}
+              <span className="gradient-text">Claim Your Spot.</span>
             </h2>
             <p className="text-lg text-[#71717a] mb-8">
-              We&apos;re inviting a select group of lighting professionals to help shape 
-              Aether DMX before public release. The beta is completely free during the testing phase. Early adopters will receive founding member 
-              pricing after launch.
+              We&apos;re accepting a limited number of beta testers right now. The first 5 approved
+              users receive a free hardware kit. Everyone gets free software access during
+              the beta period.
             </p>
 
             <div className="space-y-6">
@@ -282,9 +283,9 @@ export default function BetaSignup() {
                   </svg>
                 </div>
                 <div>
-                  <h3 className="text-white font-semibold mb-1">Founding member benefits</h3>
+                  <h3 className="text-white font-semibold mb-1">Early adopter perks</h3>
                   <p className="text-sm text-[#71717a]">
-                    Lock in special pricing, get priority support, and receive credits for 
+                    Get priority support, direct access to the dev team, and credits for
                     contributed fixture profiles or bug reports.
                   </p>
                 </div>
@@ -473,7 +474,7 @@ export default function BetaSignup() {
                     Submitting...
                   </>
                 ) : (
-                  'Apply for Private Beta'
+                  'Apply Now'
                 )}
               </button>
 

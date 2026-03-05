@@ -1,258 +1,77 @@
 ---
 title: "AETHER DMX — Installation"
-description: "Step-by-step installation instructions for Aether Portal on Raspberry Pi and Pulse node firmware flashing."
+description: "How to get AETHER DMX up and running on your Raspberry Pi controller."
 order: 2
 version: "v0.9 Beta"
 ---
 
 # Installation Guide
 
-This guide covers the complete installation process for AETHER DMX, including Portal OS setup, Pulse firmware flashing, and network configuration.
+This guide covers getting AETHER DMX up and running on your Raspberry Pi controller.
 
-## Part 1: Portal Installation (Raspberry Pi)
+## Portal Installation (Raspberry Pi)
 
-### Option A: Pre-built Image (Recommended)
+### Pre-built Image (Recommended)
 
-Download the latest AETHER OS image from our releases page and flash it to your microSD card.
+The easiest way to get started is with the AETHER OS image. This includes everything pre-configured and boots directly into the AETHER interface.
 
-1. Download the latest `aether-os-*.img.gz` from GitHub releases
-2. Use Raspberry Pi Imager or balenaEtcher to flash the image
+1. Download the latest AETHER OS image from your beta invite email
+2. Use Raspberry Pi Imager or balenaEtcher to flash the image to your microSD card
 3. Insert the microSD card into your Raspberry Pi
-4. Connect power and display - the system will boot automatically
+4. Connect power and display — the system boots automatically into AETHER
 
-> ℹ️ **Note**  
-> The pre-built image includes all dependencies and boots directly to the AETHER kiosk interface.
-
-### Option B: Manual Installation
-
-> ⚠️ **Warning**  
-> Manual installation is intended for advanced users comfortable with Linux system administration. Beta users are strongly encouraged to use the pre-built image.
-
-For advanced users who want to install on an existing Raspberry Pi OS installation:
-
-**Step 1: Install Raspberry Pi OS Lite (64-bit, Bookworm)**
-
-```bash
-# Download and flash using Raspberry Pi Imager
-# Choose: Raspberry Pi OS Lite (64-bit)
-# Configure WiFi and SSH in the imager settings
-```
-
-**Step 2: Initial System Setup**
-
-```bash
-sudo apt update && sudo apt upgrade -y
-sudo apt install -y git python3-pip python3-venv nodejs npm
-sudo apt install -y libgl1-mesa-glx ola cage
-```
-
-**Step 3: Clone the AETHER Repository**
-
-```bash
-cd /home/aether
-git clone https://github.com/Aether-DMX/aether-core.git
-cd aether-core
-```
-
-**Step 4: Install Python Dependencies**
-
-```bash
-pip install -r requirements.txt --break-system-packages
-# Or use a virtual environment:
-python3 -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
-```
-
-**Step 5: Build the React Frontend**
-
-```bash
-cd frontend
-npm install
-npm run build
-cd ..
-```
-
-**Step 6: Configure systemd Service**
-
-```bash
-sudo cp systemd/aether-core.service /etc/systemd/system/
-sudo systemctl daemon-reload
-sudo systemctl enable aether-core
-sudo systemctl start aether-core
-```
-
-**Step 7: Configure WiFi Access Point**
-
-The Portal creates its own WiFi network for Pulse nodes to connect to.
-
-```bash
-# Edit hostapd configuration
-sudo nano /etc/hostapd/hostapd.conf
-
-# Set your network name and password:
-ssid=AETHER-DMX
-wpa_passphrase=your_secure_password
-
-# Enable and start hostapd
-sudo systemctl unmask hostapd
-sudo systemctl enable hostapd
-sudo systemctl start hostapd
-```
-
-### Boot Configuration
-
-For kiosk mode without desktop, add these settings:
-
-**/boot/firmware/config.txt:**
-
-```ini
-# Enable DRM/KMS driver for Wayland
-dtoverlay=vc4-kms-v3d
-
-# Disable splash and quiet boot
-disable_splash=1
-
-# GPU memory allocation
-gpu_mem=256
-
-# For 7-inch official display
-dtoverlay=vc4-kms-dsi-7inch
-```
-
-**/boot/firmware/cmdline.txt:**
-
-```
-# Add to existing line (do not create new lines):
-quiet splash plymouth.ignore-serial-consoles logo.nologo
-```
-
-## Part 2: Pulse Node Firmware
-
-### Requirements
-
-- ESP32-DevKitC-32 or ESP32-S3 development board
-- USB cable for flashing
-- PlatformIO IDE (VS Code extension) or Arduino IDE
-
-### Flashing with PlatformIO (Recommended)
-
-```bash
-# Clone the Pulse firmware repository
-git clone https://github.com/Aether-DMX/aether-pulse.git
-cd aether-pulse
-
-# Build and upload
-pio run -t upload
-
-# Monitor serial output
-pio device monitor
-```
-
-### Configuration
-
-Edit the configuration file before flashing to set WiFi credentials and node identity:
-
-**src/config.h:**
-
-```cpp
-#define WIFI_SSID "AETHER-DMX"
-#define WIFI_PASSWORD "your_secure_password"
-
-#define NODE_NAME "Pulse-001"
-#define DMX_UNIVERSE_1 1
-#define DMX_UNIVERSE_2 2  // Set to 0 if using only one universe
-
-#define SACN_MULTICAST true
-#define SACN_PORT 5568
-```
+> **Note**
+> The pre-built image includes all software and boots directly to the AETHER kiosk interface. No command line setup required.
 
 ### First Boot
 
-After flashing, the Pulse node will:
+On first boot, AETHER will:
 
-1. Attempt to connect to the configured WiFi network
-2. Display connection status on the OLED (if connected)
-3. Begin listening for sACN multicast packets
-4. Output DMX data when frames are received
+1. Configure the system automatically
+2. Start the dedicated network for your DMX nodes
+3. Launch the AETHER control interface
+4. Display the setup wizard to guide you through initial configuration
 
-> ⚠️ **Warning**  
-> If connection fails, the node will retry every 5 seconds. Check that the Portal WiFi AP is running and credentials match.
+The setup wizard walks you through:
 
-## Part 3: Network Configuration
+- Naming your system
+- Connecting to your venue's internet (optional, for AI features)
+- Discovering connected DMX nodes
 
-### Default Network Settings
+## Pulse Node Setup
 
-| Setting | Value |
-|---------|-------|
-| Portal IP | 192.168.4.1 |
-| DHCP Range | 192.168.4.10 - 192.168.4.100 |
-| Subnet Mask | 255.255.255.0 |
-| sACN Multicast | 239.255.0.x (where x = universe) |
-| Web UI Port | 5000 |
-| sACN Port | 5568 |
+### Connecting Nodes
 
-### Connecting to External Networks
+Pulse nodes come pre-loaded with firmware. Simply power them on and they will automatically connect to your AETHER controller.
 
-The Portal can simultaneously connect to an external WiFi network for AI features while hosting its own AP for Pulse nodes:
+1. Power on the Pulse node via USB
+2. The node will search for your AETHER controller
+3. Once connected, the status indicator turns green
+4. The node appears in the AETHER UI under **Nodes**
 
-```bash
-# Configure wlan0 as client to external network
-sudo nmcli device wifi connect "YourNetworkName" password "password"
+### Assigning Universes
 
-# The AP runs on wlan0:0 virtual interface
-```
+Once a node is connected:
 
-## Part 4: Verification
+1. Go to **Nodes** in the AETHER UI
+2. Tap the node you want to configure
+3. Assign it to a DMX universe
+4. Connect your DMX fixtures to the node's output
 
-### Check Portal Status
+## Verification
 
-```bash
-# Check service status
-sudo systemctl status aether-core
+### Check Everything Works
 
-# View logs
-journalctl -u aether-core -f
+1. Verify the AETHER UI is running on your controller
+2. Confirm all Pulse nodes show green status in the Nodes view
+3. Connect a DMX fixture to a Pulse node
+4. Use **Live Control** to send test values and verify the fixture responds
 
-# Check WiFi AP
-iwconfig
-hostapd_cli status
-```
+> **Need Help?**
+> If you run into issues, check the Troubleshooting guide or reach out on Discord for support.
 
-### Check Pulse Node Connection
+## Updating
 
-On the Portal touchscreen, navigate to **Nodes** to see connected Pulse nodes. Each node should show:
+AETHER checks for updates automatically. When an update is available, you'll see a notification in Settings. Updates can be applied with a single tap.
 
-- Green status indicator (connected)
-- Node name and firmware version
-- Assigned universe(s)
-- Last seen timestamp
-
-### Test DMX Output
-
-1. Connect a DMX fixture to a Pulse node
-2. In the Portal UI, go to **Live Control**
-3. Set Universe 1, Channel 1 to 100%
-4. Verify the fixture responds
-
-> ℹ️ **Note**  
-> If DMX output is not working, check the Troubleshooting guide for common issues.
-
-## Updating the System
-
-### Portal Updates
-
-```bash
-cd /home/aether/aether-core
-git pull origin main
-pip install -r requirements.txt --break-system-packages
-cd frontend && npm install && npm run build
-sudo systemctl restart aether-core
-```
-
-### Pulse Firmware Updates
-
-OTA updates can be triggered from the Portal UI under **Settings > Nodes > Update Firmware**. Alternatively, connect the node via USB and reflash manually.
-
-> ℹ️ **Note**  
-> Manual installations may require additional troubleshooting and are not fully supported during early beta. For the smoothest experience, use the pre-built image.
+Pulse node firmware can be updated wirelessly from the AETHER UI under **Settings > Nodes > Update Firmware**.

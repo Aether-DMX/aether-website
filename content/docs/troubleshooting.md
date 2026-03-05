@@ -27,65 +27,47 @@ Before diving into specific issues, run through this quick checklist:
 
 Possible causes and solutions:
 
-- **Power supply insufficient**: Use official Pi 5 power supply (5V/5A)
+- **Power supply insufficient**: Use the recommended power supply for your Pi model
 - **Corrupted SD card**: Re-flash the AETHER OS image
-- **Display connection loose**: Reseat the DSI ribbon cable
+- **Display connection loose**: Reseat the display cable
 - **Overheating**: Ensure heatsink/fan is installed and working
 
 ### Portal Boots to Desktop (Not Kiosk)
 
 **Symptom:** Raspberry Pi desktop appears instead of AETHER UI
 
-This indicates the kiosk service failed to start:
-
-```bash
-# Check service status
-sudo systemctl status aether-core
-
-# View error logs
-journalctl -u aether-core -n 50
-
-# Restart the service
-sudo systemctl restart aether-core
-```
+This indicates the kiosk service failed to start. Use the **Diagnostics** view in the AETHER UI or re-flash the AETHER OS image to restore the kiosk configuration.
 
 ### UI Freezes or Crashes
 
 If the touch interface becomes unresponsive:
 
-- Wait 30 seconds - the system may be processing
-- Check CPU temperature in Diagnostics (should be under 80°C)
-- SSH in and restart the service: `sudo systemctl restart aether-core`
-- As last resort, power cycle the Portal
+- Wait 30 seconds — the system may be processing
+- Check CPU temperature in **Diagnostics** (should be under 80°C)
+- Power cycle the Portal as a last resort
+- If the issue persists, re-flash the AETHER OS image
 
-### WiFi Access Point Not Visible
+### WiFi Network Not Visible
 
-If Pulse nodes can't find the AETHER-DMX network:
+If Pulse nodes can't find the AETHER network:
 
-```bash
-# Check hostapd status
-sudo systemctl status hostapd
-
-# View hostapd logs
-sudo journalctl -u hostapd -n 20
-
-# Restart hostapd
-sudo systemctl restart hostapd
-```
+- Verify the Portal is powered on and fully booted
+- Check that no other device is using the same WiFi channel
+- Move Pulse nodes closer to the Portal
+- Power cycle the Portal to restart the network
 
 ## Pulse Node Issues
 
 ### Node Not Connecting
 
-**OLED shows:** "Connecting..." for more than 30 seconds
+**Symptom:** Node shows "Connecting..." for more than 30 seconds
 
 Check these items:
 
-1. Verify WiFi credentials match Portal AP configuration
+1. Verify the Portal is powered on and the network is running
 2. Check distance from Portal (try moving closer)
-3. Ensure Portal WiFi AP is running (see above)
-4. Try power cycling the node
-5. Reflash firmware if problem persists
+3. Try power cycling the node
+4. Reflash firmware if problem persists (available in **Settings > Nodes > Update Firmware**)
 
 ### Node Connected But No DMX Output
 
@@ -94,32 +76,31 @@ Check these items:
 Diagnostic steps:
 
 1. Check DMX cable connection at both ends
-2. Verify universe assignment in Portal UI matches node config
-3. Test with a known-good DMX tester
-4. Check MAX485 wiring (see Hardware Setup guide)
+2. Verify universe assignment in Portal UI matches the node
+3. Test with a known-good DMX cable
+4. Check the wiring on the DMX output connector (see Hardware Setup guide)
 5. Try a different DMX cable
 
 ### Intermittent DMX Flickering
 
 Possible causes:
 
-- **WiFi interference**: Move node or add access point
+- **WiFi interference**: Move node closer to Portal or reduce interference
 - **Loose wiring**: Check all connections
-- **Ground loops**: Use isolated DMX splitter
-- **Power supply noise**: Use filtered power supply
-- **Cable too long**: Add DMX repeater or use shorter run
+- **Ground loops**: Use an isolated DMX splitter
+- **Power supply noise**: Use a filtered power supply
+- **Cable too long**: Add a DMX repeater or use a shorter run
 
 ### Node Error Codes (OLED Display)
 
 | Code | Meaning | Solution |
 |------|---------|----------|
-| E01 | WiFi connection failed | Check credentials, distance |
-| E02 | No sACN packets received | Verify Portal is running, check multicast |
-| E03 | DMX output error | Check MAX485 wiring |
+| E01 | WiFi connection failed | Check distance, power cycle Portal |
+| E02 | No data received from Portal | Verify Portal is running |
+| E03 | DMX output error | Check wiring on DMX connector |
 | E04 | Overtemperature | Improve ventilation, reduce load |
 | E05 | Memory error | Power cycle, reflash if persistent |
 | E06 | Configuration invalid | Factory reset, reconfigure |
-| E07-E99 | Reserved | Reserved for future use |
 
 ## DMX & Fixture Issues
 
@@ -131,7 +112,7 @@ Work through this checklist:
 2. Is the fixture in the correct DMX mode?
 3. Does the fixture address match the patch?
 4. Is the DMX cable connected (check both in and out)?
-5. Try the fixture with a different controller
+5. Try the fixture with a different controller to isolate the issue
 
 ### Wrong Colors or Behaviors
 
@@ -139,8 +120,8 @@ Work through this checklist:
 
 This usually indicates a mode mismatch:
 
-- Check fixture's DMX mode setting
-- Verify patch profile matches fixture mode
+- Check fixture's DMX mode setting on the fixture itself
+- Verify patch profile matches fixture mode in AETHER
 - Some fixtures have multiple RGB orders (RGB, RBG, GBR)
 - Create a custom fixture profile if needed
 
@@ -165,49 +146,32 @@ Check the **Diagnostics > Network** view for packet statistics:
 
 Solutions:
 
-- Reduce distance between nodes and access point
+- Reduce distance between nodes and Portal
 - Add a dedicated access point for AETHER
-- Switch to wired Ethernet for Portal
+- Switch to wired Ethernet for the Portal
 - Check for WiFi interference (other networks, microwaves)
 
-### sACN Multicast Not Working
-
-If nodes connect but don't receive DMX data:
-
-```bash
-# Test multicast on Portal
-python3 -c "import socket; s=socket.socket(socket.AF_INET,
-  socket.SOCK_DGRAM); s.setsockopt(socket.IPPROTO_IP,
-  socket.IP_MULTICAST_TTL, 2); s.sendto(b'test',
-  ('239.255.0.1', 5568))"
-
-# On node (if accessible via serial)
-# Check if multicast packets are being received
-```
-
-## AI & Cloud Issues
+## AI Issues
 
 ### AI Not Responding
 
 Check these items:
 
-- Verify internet connection on Portal
+- Verify internet connection on the Portal
 - Check AI mode is set to Hybrid or Cloud (not Local)
-- API rate limits may apply - wait and retry
+- Wait and retry — the service may be temporarily busy
 - Check **Settings > Cloud** for connection status
 
-### AI Generates Wrong Results
+### AI Generates Unexpected Results
 
 If AI output doesn't match expectations:
 
 - Be more specific in your description
 - Check that fixture groups are named clearly
-- Verify patch is complete and accurate
-- Use the feedback button to improve AI responses
+- Verify your patch is complete and accurate
+- Use the feedback button to improve future responses
 
-## Diagnostic Tools
-
-### Built-in Diagnostics
+## Built-in Diagnostics
 
 Access from the main menu **> Diagnostics**:
 
@@ -217,70 +181,36 @@ Access from the main menu **> Diagnostics**:
 - **Nodes**: Individual Pulse node status and history
 - **Logs**: Recent events and errors
 
-### Command Line Tools
-
-```bash
-# Service status
-sudo systemctl status aether-core
-
-# View live logs
-journalctl -u aether-core -f
-
-# Network diagnostics
-ip addr show
-iwconfig
-ping 192.168.4.x  # (pulse node IP)
-
-# OLA status
-ola_dev_info
-ola_streaming_client -u 1  # Monitor universe 1
-```
-
 ## Factory Reset
 
 ### Soft Reset (Preserves Data)
 
-Restarts services and clears temporary state:
-
-```bash
-sudo systemctl restart aether-core
-sudo systemctl restart hostapd
-```
+Use **Settings > System > Restart Services** to restart the AETHER software without losing any data.
 
 ### Hard Reset (Clears All Data)
 
-> 🚨 **Critical**  
+> **Warning**
 > This will erase all patches, scenes, and settings!
 
-```bash
-# Stop services
-sudo systemctl stop aether-core
-
-# Clear database
-rm /home/aether/aether-core/data/*.db
-
-# Restart
-sudo systemctl start aether-core
-```
+Use **Settings > System > Factory Reset** to clear all data and return to the initial setup wizard.
 
 ### Pulse Node Factory Reset
 
-Hold the **BOOT** button for 10 seconds while powering on to reset WiFi credentials and return to setup mode.
+Hold the **BOOT** button for 10 seconds while powering on to reset the node and return to setup mode.
 
 ## Getting Help
 
 ### Community Support
 
 - **Discord**: Join our community server for real-time help
-- **GitHub Issues**: Report bugs and feature requests
-- **Documentation**: https://docs.aetherdmx.com
+- **Email**: Reach out to the team at hello@aetherdmx.com
 
 ### When Reporting Issues
 
 Include this information for faster resolution:
 
 1. AETHER version (shown in **Settings > About**)
-2. Hardware configuration (Pi model, Pulse node types)
+2. Hardware configuration (Pi model, number of Pulse nodes)
 3. Steps to reproduce the issue
 4. Screenshots or video if possible
-5. Relevant log output from `journalctl`
+5. Any error codes displayed on the Pulse node OLED

@@ -4,9 +4,9 @@ export default function Footer() {
   const footerLinks = {
     product: [
       { href: '/#features', label: 'Features' },
-      { href: '/#pricing', label: 'Pricing' },
-      { href: '/#deployment', label: 'Deployment Modes' },
-      { href: '/#beta', label: 'Join Beta' },
+      { href: '/#how-it-works', label: 'How It Works' },
+      { href: '/#hardware', label: 'What You Need' },
+      { href: '/#beta', label: 'Apply for Beta' },
     ],
     resources: [
       { href: '/hardware', label: 'Hardware Guide' },
@@ -14,7 +14,7 @@ export default function Footer() {
     ],
     company: [
       { href: 'mailto:hello@aetherdmx.com', label: 'Contact' },
-      { href: 'mailto:support@aetherdmx.com', label: 'Support' },
+      { href: 'https://discord.gg/uAHsRVtJMY', label: 'Discord' },
     ],
   };
 
