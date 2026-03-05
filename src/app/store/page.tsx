@@ -58,19 +58,19 @@ const products: Product[] = [
     ],
   },
   {
-    id: 'power-adapters',
-    name: '12V / 24V Power Adapters',
-    tagline: 'Clean Power for Your Nodes',
+    id: 'power-module',
+    name: 'Power Module',
+    tagline: 'Snap-On Power Distribution',
     description:
-      'Tested and approved power supplies for DMX nodes. Available in 12V and 24V variants to match your installation requirements.',
+      'A magnetic module that snaps onto the top of your DMX node. Provides clean 12V or 24V power distribution — just click it on and your node is powered.',
     status: 'coming_soon',
     accentColor: '#f59e0b',
     gradient: 'from-[#f59e0b] to-[#d97706]',
     iconPath: 'M13 10V3L4 14h7v7l9-11h-7z',
     features: [
+      'Magnetic snap-on attachment',
       '12V and 24V options',
-      'UL / CE certified',
-      'Barrel connector included',
+      'Hot-swappable — no tools needed',
     ],
   },
   {
