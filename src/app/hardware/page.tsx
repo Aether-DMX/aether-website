@@ -99,7 +99,7 @@ export default function HardwarePage() {
               <p className="text-sm text-[#71717a]">
                 The first 5 accepted beta users will receive a free DMX node hardware kit.
                 Additional approved beta users will receive a hardware spec sheet to source
-                their own components, or can purchase pre-assembled kits from our upcoming store.
+                their own components, or can purchase pre-assembled kits from our store.
               </p>
             </div>
           </div>
@@ -202,7 +202,7 @@ export default function HardwarePage() {
               <h3 className="text-lg font-semibold text-white mb-2">Buy Pre-Assembled</h3>
               <p className="text-sm text-[#71717a]">
                 Don&apos;t want to build? Pre-assembled DMX node kits will be
-                available for purchase in our upcoming store.
+                available for purchase in our store.
               </p>
               <span className="inline-block mt-4 text-xs font-medium px-2 py-1 rounded bg-[#f59e0b]/20 text-[#f59e0b]">
                 Coming Soon
@@ -282,7 +282,7 @@ export default function HardwarePage() {
               <p>
                 <strong className="text-white">Electrical Safety:</strong> DMX nodes use standard
                 low-voltage connections. If you&apos;re not comfortable with basic electronics,
-                we recommend purchasing a pre-assembled kit from our upcoming store.
+                we recommend purchasing a pre-assembled kit from our store.
               </p>
               <p>
                 <strong className="text-white">Best Experience:</strong> For the most reliable 

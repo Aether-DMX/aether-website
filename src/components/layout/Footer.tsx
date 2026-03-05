@@ -5,6 +5,7 @@ export default function Footer() {
     product: [
       { href: '/#features', label: 'Features' },
       { href: '/#how-it-works', label: 'How It Works' },
+      { href: '/store', label: 'Store' },
       { href: '/#beta', label: 'Apply for Beta' },
     ],
     resources: [

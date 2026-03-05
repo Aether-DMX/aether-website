@@ -9,6 +9,7 @@ export default function Navbar() {
   const navLinks = [
     { href: '/#features', label: 'Features' },
     { href: '/hardware', label: 'Hardware Guide' },
+    { href: '/store', label: 'Store' },
     { href: '/docs', label: 'Docs' },
   ];
 
