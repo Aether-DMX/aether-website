@@ -1,3 +1,10 @@
+// TODO: Connect store to Stripe (or similar payment gateway) for actual sales processing.
+//   - Set up Stripe product catalog & price IDs
+//   - Add checkout session API route (app/api/checkout/route.ts)
+//   - Replace "Join Waitlist" CTAs with "Add to Cart" / "Buy Now" buttons
+//   - Handle inventory, order confirmation emails, and webhook events
+//   - Add order history / account page for customers
+
 import type { Metadata } from 'next';
 import Link from 'next/link';
 
