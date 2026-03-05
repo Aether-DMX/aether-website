@@ -90,24 +90,28 @@ export async function POST(request: NextRequest) {
     });
 
     // Send admin notification email (fire-and-forget)
-    const adminEmail = process.env.ADMIN_NOTIFICATION_EMAIL;
-    if (adminEmail) {
-      sendEmail({
-        to: adminEmail,
-        subject: `New beta signup: ${full_name.trim()}`,
-        react: React.createElement(AdminNewSignup, {
-          fullName: full_name.trim(),
-          email: email.toLowerCase().trim(),
-          role: role,
-          company: body.company || null,
-          experienceLevel: experience_level,
-          currentSystem: body.current_system || null,
-          interestReason: body.interest_reason || null,
-          howHeard: body.how_heard || null,
-        }),
-      }).catch((err) => {
-        console.error('[beta/signup] Admin notification error:', err);
-      });
+    // Supports comma-separated list of emails in ADMIN_NOTIFICATION_EMAIL
+    const adminEmailRaw = process.env.ADMIN_NOTIFICATION_EMAIL;
+    if (adminEmailRaw) {
+      const adminEmails = adminEmailRaw.split(',').map((e) => e.trim()).filter(Boolean);
+      if (adminEmails.length > 0) {
+        sendEmail({
+          to: adminEmails,
+          subject: `New beta signup: ${full_name.trim()}`,
+          react: React.createElement(AdminNewSignup, {
+            fullName: full_name.trim(),
+            email: email.toLowerCase().trim(),
+            role: role,
+            company: body.company || null,
+            experienceLevel: experience_level,
+            currentSystem: body.current_system || null,
+            interestReason: body.interest_reason || null,
+            howHeard: body.how_heard || null,
+          }),
+        }).catch((err) => {
+          console.error('[beta/signup] Admin notification error:', err);
+        });
+      }
     }
 
     return NextResponse.json({ success: true });
