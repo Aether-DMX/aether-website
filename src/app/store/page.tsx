@@ -74,20 +74,20 @@ const products: Product[] = [
     ],
   },
   {
-    id: 'dmx-connectors',
-    name: 'DMX Connectors & Cables',
-    tagline: 'Professional Cabling',
+    id: 'dmx-connector-module',
+    name: 'DMX Connector Module',
+    tagline: 'Snap-On DMX Output',
     description:
-      'XLR-3 and XLR-5 connectors, DMX cables, and terminators. Everything you need to wire your DMX chain properly.',
+      'A magnetic module that snaps onto the top of your DMX node. Adds a standard DMX output connector — just click it on and you\'re wired.',
     status: 'coming_soon',
     accentColor: '#f59e0b',
     gradient: 'from-[#f59e0b] to-[#d97706]',
     iconPath:
       'M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244',
     features: [
-      'XLR-3 and XLR-5 options',
-      'DMX-rated shielded cable',
-      'Terminators included',
+      'Magnetic snap-on attachment',
+      'Standard DMX output connector',
+      'Hot-swappable — no tools needed',
     ],
   },
 ];
