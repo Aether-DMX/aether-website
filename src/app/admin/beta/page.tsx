@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 interface BetaSignup {
   signup_id: string;
@@ -71,7 +72,11 @@ export default function AdminBetaPage() {
       const response = await fetch('/api/admin/beta/approve', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ signup_id: signupId }),
+        body: JSON.stringify({
+          signup_id: signupId,
+          email,
+          full_name: signups.find((s) => s.signup_id === signupId)?.full_name,
+        }),
       });
 
       const data = await response.json();
@@ -105,7 +110,11 @@ export default function AdminBetaPage() {
       const response = await fetch('/api/admin/beta/resend', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ signup_id: signupId }),
+        body: JSON.stringify({
+          signup_id: signupId,
+          email,
+          full_name: signups.find((s) => s.signup_id === signupId)?.full_name,
+        }),
       });
 
       const data = await response.json();
@@ -181,15 +190,26 @@ export default function AdminBetaPage() {
               Review and manage beta signups
             </p>
           </div>
-          <button
-            onClick={handleLogout}
-            className="text-[#71717a] hover:text-white transition-colors text-sm flex items-center gap-2 bg-[#111114] border border-[#1f1f24] rounded-lg px-4 py-2"
-          >
+          <div className="flex items-center gap-3">
+            <Link
+              href="/admin/broadcasts"
+              className="text-[#71717a] hover:text-white transition-colors text-sm flex items-center gap-2 bg-[#111114] border border-[#1f1f24] rounded-lg px-4 py-2"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+              Broadcasts
+            </Link>
+            <button
+              onClick={handleLogout}
+              className="text-[#71717a] hover:text-white transition-colors text-sm flex items-center gap-2 bg-[#111114] border border-[#1f1f24] rounded-lg px-4 py-2"
+            >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
             </svg>
             Logout
           </button>
+          </div>
         </div>
 
         {/* Tabs */}

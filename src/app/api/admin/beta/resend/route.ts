@@ -1,6 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { isAdminAuthenticated } from '@/lib/adminSession';
-import { invokeBetaInviteFunction } from '@/lib/supabaseAdmin';
+import { sendEmail } from '@/lib/resend';
+import { logAuditEvent } from '@/lib/auditLog';
+import { getClientIp } from '@/lib/rateLimit';
+import BetaApproval from '@/emails/BetaApproval';
+import React from 'react';
 
 export async function POST(request: NextRequest) {
   try {
@@ -13,7 +17,7 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json();
-    const { signup_id } = body;
+    const { signup_id, email, full_name } = body;
 
     if (!signup_id) {
       return NextResponse.json(
@@ -22,16 +26,36 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Invoke edge function to resend invite (no status change needed)
-    const invokeResult = await invokeBetaInviteFunction(signup_id);
-
-    if (!invokeResult.ok) {
-      console.error('Edge function error:', invokeResult.error);
+    if (!email || !full_name) {
       return NextResponse.json(
-        { ok: false, error: invokeResult.error || 'Failed to resend invite email' },
+        { ok: false, error: 'email and full_name are required' },
+        { status: 400 }
+      );
+    }
+
+    // Send approval email via Resend
+    const emailResult = await sendEmail({
+      to: email,
+      subject: "You're approved for the Aether DMX Beta!",
+      react: React.createElement(BetaApproval, { fullName: full_name }),
+    });
+
+    if (!emailResult.success) {
+      console.error('Resend invite failed:', emailResult.error);
+      return NextResponse.json(
+        { ok: false, error: emailResult.error || 'Failed to resend invite email' },
         { status: 502 }
       );
     }
+
+    // Audit log
+    const ip = getClientIp(request);
+    logAuditEvent({
+      action: 'resend_invite',
+      target_email: email,
+      target_signup_id: signup_id,
+      ip_address: ip,
+    });
 
     return NextResponse.json({ ok: true });
   } catch (error) {

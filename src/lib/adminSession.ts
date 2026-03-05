@@ -57,13 +57,38 @@ export async function isAdminAuthenticated(): Promise<boolean> {
   return verifyAdminSessionToken(token);
 }
 
-export function validateAdminCredentials(email: string, password: string): boolean {
+/**
+ * Validate admin credentials using SHA-256 hashed password comparison.
+ * Falls back to plaintext comparison if ADMIN_PASSWORD_HASH is not set
+ * (for backwards compatibility during migration).
+ */
+export async function validateAdminCredentials(email: string, password: string): Promise<boolean> {
   const adminEmail = process.env.ADMIN_EMAIL;
-  const adminPassword = process.env.ADMIN_PASSWORD;
+  const adminPasswordHash = process.env.ADMIN_PASSWORD_HASH;
+  const adminPasswordPlain = process.env.ADMIN_PASSWORD;
 
-  if (!adminEmail || !adminPassword) {
+  if (!adminEmail) {
     throw new Error('Admin credentials not configured');
   }
 
-  return email === adminEmail && password === adminPassword;
+  if (email !== adminEmail) return false;
+
+  // Prefer hashed comparison
+  if (adminPasswordHash) {
+    const encoder = new TextEncoder();
+    const data = encoder.encode(password);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+    const hashHex = Array.from(new Uint8Array(hashBuffer))
+      .map((b) => b.toString(16).padStart(2, '0'))
+      .join('');
+
+    return hashHex === adminPasswordHash;
+  }
+
+  // Fallback to plaintext (backwards compatibility)
+  if (adminPasswordPlain) {
+    return password === adminPasswordPlain;
+  }
+
+  throw new Error('Admin password not configured');
 }

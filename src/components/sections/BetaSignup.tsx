@@ -2,10 +2,6 @@
 
 import { useState, useEffect } from 'react';
 
-// Supabase configuration
-const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
-const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
-
 interface FormData {
   name: string;
   email: string;
@@ -154,12 +150,10 @@ export default function BetaSignup() {
         referrer: utmParams.referrer || null,
       };
 
-      const response = await fetch(`${SUPABASE_URL}/functions/v1/beta-signup`, {
+      const response = await fetch('/api/beta/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'apikey': SUPABASE_ANON_KEY,
-          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
         },
         body: JSON.stringify(payload),
       });
